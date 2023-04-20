@@ -33,10 +33,12 @@ namespace Assets.Scripts.MainMenuScript
         private void PlayGame()
         {
             Debug.Log("PlayGame");
+            _mainMenuModel.LevelSwith.SetActive(true);
         }
 
         public void Dispose()
         {
+            _mainMenuModel.MainMenu.SetActive(false);
             _mainMenuModel.PlayButton.onClick.RemoveAllListeners();
             _mainMenuModel.AchievementsButton.onClick.RemoveAllListeners();
             _mainMenuModel.SettingsButton.onClick.RemoveAllListeners();
