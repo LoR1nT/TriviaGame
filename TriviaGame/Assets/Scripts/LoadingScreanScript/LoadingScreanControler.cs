@@ -26,15 +26,13 @@ namespace Assets.Scripts.LoadingScrean
         private  void LoadingBarChange()
         {
             Sequence loadingBarSequence = DOTween.Sequence();
-            loadingBarSequence.SetEase(Ease.Linear);
             loadingBarSequence.SetRecyclable(true);
-            loadingBarSequence.AppendInterval(2f);
-            loadingBarSequence.Append(LoadingBarAnimation());
-            loadingBarSequence.Join(_loadingScreanModel.LoadingFillBar.DOMoveY(15, 5f));
-            loadingBarSequence.AppendInterval(2f);
+            loadingBarSequence.AppendInterval(1f);
+            loadingBarSequence.Append(LoadingBarAnimation());;
+            loadingBarSequence.AppendInterval(1f);
             loadingBarSequence.AppendCallback(() =>
             {
-                Debug.Log("I Am Finished");
+                Debug.Log("Loading Finished");
             });
         }
 
@@ -42,7 +40,7 @@ namespace Assets.Scripts.LoadingScrean
         {
             return _loadingScreanModel.LoadingFillBar
                 .DOSizeDelta(new Vector2(MaxLengthOfBar, _loadingScreanModel.LoadingFillBar.sizeDelta.y), _loadingScreanModel.LoadingBarDuration)
-                .SetEase(Ease.InSine)
+                .SetEase(Ease.InOutCubic)
                 .SetRecyclable(true);
         }
 
