@@ -802,7 +802,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2712029765398408291, guid: 6048898c08761874fbed15cfee3066e5, type: 3}
       propertyPath: m_Name
-      value: MainMenu_screan
+      value: MainMenu_screan --> Screen
       objectReference: {fileID: 0}
     - target: {fileID: 2712029765398408291, guid: 6048898c08761874fbed15cfee3066e5, type: 3}
       propertyPath: m_IsActive
@@ -920,11 +920,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3836340713962156347, guid: 371f1bc5c6256764d8d15a2a4fa7cb1f, type: 3}
       propertyPath: m_Name
-      value: BackGround_Skin_component
+      value: BackGround_Skin_component --> Screen
       objectReference: {fileID: 0}
     - target: {fileID: 3836340713962156347, guid: 371f1bc5c6256764d8d15a2a4fa7cb1f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5769433969627042261, guid: 371f1bc5c6256764d8d15a2a4fa7cb1f, type: 3}
       propertyPath: m_Pivot.x
@@ -1021,7 +1021,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2777702753965526644, guid: bcec4e38d1e48014eae75b8b67d41eb2, type: 3}
       propertyPath: m_Name
-      value: Popup_settings
+      value: Popup_settings ---> Popup
       objectReference: {fileID: 0}
     - target: {fileID: 2777702753965526644, guid: bcec4e38d1e48014eae75b8b67d41eb2, type: 3}
       propertyPath: m_IsActive
@@ -1135,7 +1135,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3593361385689073092, guid: ed558c8b642427b4b98944170ebee3bf, type: 3}
       propertyPath: m_Name
-      value: PlayLavel_screan
+      value: PlayLavel_screan --> Window and Screen
       objectReference: {fileID: 0}
     - target: {fileID: 3593361385689073092, guid: ed558c8b642427b4b98944170ebee3bf, type: 3}
       propertyPath: m_IsActive
@@ -1233,6 +1233,10 @@ PrefabInstance:
       propertyPath: _playLavelModel._wrongAnswersText
       value: 
       objectReference: {fileID: 71019909}
+    - target: {fileID: 3593361386348983565, guid: ed558c8b642427b4b98944170ebee3bf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed558c8b642427b4b98944170ebee3bf, type: 3}
 --- !u!1001 &4413900880596962413
@@ -1242,6 +1246,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 583237591}
     m_Modifications:
+    - target: {fileID: 2084866150885381268, guid: 907121e681c67444eaa960d0db090e22, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4413900880460812129, guid: 907121e681c67444eaa960d0db090e22, type: 3}
       propertyPath: _lavelButtons._levelButton
       value: 
@@ -1408,10 +1416,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4413900880460812135, guid: 907121e681c67444eaa960d0db090e22, type: 3}
       propertyPath: m_Name
-      value: LavelSwith_screan
+      value: LavelSwith_screan --> Window and Screen
       objectReference: {fileID: 0}
     - target: {fileID: 4413900880460812135, guid: 907121e681c67444eaa960d0db090e22, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7480351162847225109, guid: 907121e681c67444eaa960d0db090e22, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1425,11 +1437,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4758950384858069064, guid: 2d1d2bc0e50052e42aed177d913ac300, type: 3}
       propertyPath: m_Name
-      value: Popup_Lost
+      value: Popup_Lost --> Popup
       objectReference: {fileID: 0}
     - target: {fileID: 4758950384858069064, guid: 2d1d2bc0e50052e42aed177d913ac300, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4758950384858069067, guid: 2d1d2bc0e50052e42aed177d913ac300, type: 3}
       propertyPath: m_Pivot.x
@@ -1531,7 +1543,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6995780568299536937, guid: 4de25fb36adad9d4b9600190286cd1db, type: 3}
       propertyPath: m_Name
-      value: Popup_Victory
+      value: Popup_Victory --> Popup
       objectReference: {fileID: 0}
     - target: {fileID: 6995780568299536937, guid: 4de25fb36adad9d4b9600190286cd1db, type: 3}
       propertyPath: m_IsActive
@@ -1716,7 +1728,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8551421119784131859, guid: 702318d925e6bb14bb972ebbeba7396c, type: 3}
       propertyPath: m_Name
-      value: Loading_screan
+      value: Loading_screan --> Screen
       objectReference: {fileID: 0}
     - target: {fileID: 8551421119784131859, guid: 702318d925e6bb14bb972ebbeba7396c, type: 3}
       propertyPath: m_IsActive
