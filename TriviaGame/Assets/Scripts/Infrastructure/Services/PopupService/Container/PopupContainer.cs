@@ -12,6 +12,8 @@ namespace Infrastructure.Services.PopupService.Container
             _popupContainer = new Dictionary<PopupType, PopupConfiguration>
             {
                 [PopupType.SettingsPopup] = new PopupConfiguration("Setting Popup", "Popups/PopupSettings/Popup_settings"),
+                [PopupType.VicrotyPopup] = new PopupConfiguration("Victory Popup", "Popups/PopupVictory/Popup_Victory"),
+                [PopupType.LostPopup] = new PopupConfiguration("Lost Popup", "Popups/PopupLost/Popup_Lost"),
             };
         }
 

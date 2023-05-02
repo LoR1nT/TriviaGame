@@ -39,6 +39,13 @@ namespace Infrastructure.Services.PopupService.Implementation
 
             SpawnPopup(config);
         }
+        private void SpawnPopup(PopupConfiguration config)
+        {
+            GameObject popupObject = Resources.Load<GameObject>(config.PrefabName);
+            
+            config.Implementation = Object.Instantiate(popupObject);
+            _openedPopups.Add(config);
+        }
 
         public void ClosePopup(PopupType type)
         {
@@ -54,12 +61,5 @@ namespace Infrastructure.Services.PopupService.Implementation
         {
         }
 
-        private void SpawnPopup(PopupConfiguration config)
-        {
-            GameObject popupObject = Resources.Load<GameObject>(config.PrefabName);
-            
-            config.Implementation = Object.Instantiate(popupObject);
-            _openedPopups.Add(config);
-        }
     }
 }
