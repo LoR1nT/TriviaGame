@@ -10,6 +10,6 @@ namespace Assets.Scripts.Infrastructure.Services.ScreansService.Container
 {
     public interface IScreanContainer
     {
-        public ScreanConfiguration GetPopupConfig(ScreanType type);
+        public ScreanConfiguration GetScreanConfig(ScreanType type);
     }
 }

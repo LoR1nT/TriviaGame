@@ -5,17 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Assets.Scripts.Infrastructure.Services.ScreansService.Data
+namespace Assets.Scripts.Infrastructure.Services.WindowsService.Data
 {
-    public class ScreanConfiguration
+    public class WindowsConfiguration
     {
-        public string ScreanName { get; } = string.Empty;
+        public string WindowsName { get; } = string.Empty;
         public string PrefabName { get; } = string.Empty;
         public GameObject Implementation { get; set; }
 
-        public ScreanConfiguration(string name, string prefabName)
+        public WindowsConfiguration(string name, string prefabName)
         {
-            ScreanName = name;
+            WindowsName = name;
             PrefabName = prefabName;
         }
     }

@@ -11,6 +11,9 @@ namespace Infrastructure.MonoComponents.UI.UIRoot.Implementation
         
         [Header("Windows")]
         [SerializeField] private RectTransform _windowsRoot = null;
+
+        [Header("Popups")]
+        [SerializeField] private RectTransform _popupsRoot = null;
         
         public RectTransform GetUIRoot(UIRootType type)
         {
@@ -21,7 +24,7 @@ namespace Infrastructure.MonoComponents.UI.UIRoot.Implementation
                 case UIRootType.WindowsRoot:
                     return _windowsRoot;
                 case UIRootType.PopupsRoot:
-                    return null;
+                    return _popupsRoot;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }

@@ -87,12 +87,12 @@ GameObject:
   - component: {fileID: 4413900880460812134}
   - component: {fileID: 4413900880460812129}
   m_Layer: 5
-  m_Name: LavelSwith_screan
+  m_Name: LevelSwith_screan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4413900880460812134
 RectTransform:
   m_ObjectHideFlags: 0
@@ -132,12 +132,7 @@ MonoBehaviour:
     _backButton: {fileID: 1292948064910195260}
     _reachedContOfStars: {fileID: 7219783648155566298}
     _maxCountOfStars: {fileID: 5558890650792691111}
-    _firstLevelButton: {fileID: 4413900882219154256}
-    _secondLevelButton: {fileID: 4413900880572782966}
-    _thirdLevelButton: {fileID: 4413900881369022147}
-    _fourthLevelButton: {fileID: 4413900881759664745}
-    _fifthLevelButton: {fileID: 4413900880531594592}
-    _sixthLevelButton: {fileID: 4413900881422650282}
+    _levelsButtons: []
 --- !u!1 &4413900880531594598
 GameObject:
   m_ObjectHideFlags: 0

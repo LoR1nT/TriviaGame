@@ -17,7 +17,7 @@ namespace Assets.Scripts.Infrastructure.Services.ScreansService.Container
             };
         }
 
-        public ScreanConfiguration GetPopupConfig(ScreanType type)
+        public ScreanConfiguration GetScreanConfig(ScreanType type)
         {
             if (!_screanContainer.ContainsKey(type))
             {

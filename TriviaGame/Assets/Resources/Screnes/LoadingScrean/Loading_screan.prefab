@@ -220,7 +220,7 @@ RectTransform:
   - {fileID: 86210932824119867}
   - {fileID: 866474412947801222}
   m_Father: {fileID: 8221066460453940026}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -255,6 +255,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5194467296487527170}
   - {fileID: 6318617455715151747}
   - {fileID: 8221066460478456780}
   - {fileID: 8221066461876439355}
@@ -297,7 +298,7 @@ RectTransform:
   m_Children:
   - {fileID: 8221066462143973555}
   m_Father: {fileID: 8221066460453940026}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -469,7 +470,7 @@ RectTransform:
   m_Children:
   - {fileID: 8221066461529369978}
   m_Father: {fileID: 8221066460453940026}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -776,7 +777,7 @@ RectTransform:
   m_Children:
   - {fileID: 8221066462372380134}
   m_Father: {fileID: 8221066460453940026}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -799,7 +800,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6351738931774792849
 RectTransform:
   m_ObjectHideFlags: 0
@@ -813,7 +814,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8221066460453940026}
-  - {fileID: 5194467296487527170}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -842,11 +842,11 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 6351738931774792849}
+    m_TransformParent: {fileID: 8221066460453940026}
     m_Modifications:
     - target: {fileID: 3836340713962156347, guid: 371f1bc5c6256764d8d15a2a4fa7cb1f, type: 3}
       propertyPath: m_Name
-      value: BackGround_Skin_component --> Screen
+      value: BackGround_Skin_component
       objectReference: {fileID: 0}
     - target: {fileID: 5769433969627042261, guid: 371f1bc5c6256764d8d15a2a4fa7cb1f, type: 3}
       propertyPath: m_Pivot.x
@@ -858,7 +858,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5769433969627042261, guid: 371f1bc5c6256764d8d15a2a4fa7cb1f, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5769433969627042261, guid: 371f1bc5c6256764d8d15a2a4fa7cb1f, type: 3}
       propertyPath: m_AnchorMax.x
