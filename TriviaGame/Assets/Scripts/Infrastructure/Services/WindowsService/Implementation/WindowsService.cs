@@ -44,9 +44,7 @@ namespace Assets.Scripts.Infrastructure.Services.WindowsService.Implementation
             configuration.Implementation = Object.Instantiate(windowsOdject,windowRectTransform);
             _windowsConfigurations.Add(configuration);
         }
-
-
-
+        
         public void CloseWindow(WindowsType type)
         {
             WindowsConfiguration configuration = _windowsContainer.GetWindowsConfig(type);

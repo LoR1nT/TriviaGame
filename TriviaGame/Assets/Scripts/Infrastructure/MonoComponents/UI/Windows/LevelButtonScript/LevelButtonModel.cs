@@ -17,6 +17,5 @@ namespace Assets.Scripts.Infrastructure.MonoComponents.UI.Windows.LevelButtonScr
 
         public Button LevelButton { get { return _levelButton; } }
         public TMP_Text NumberOfLevelText { get {  return _numberOfLevelText; } }
-
     }
 }
