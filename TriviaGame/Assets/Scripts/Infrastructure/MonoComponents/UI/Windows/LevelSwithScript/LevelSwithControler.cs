@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Infrastructure.Services.Popups.Implementation;
+using Infrastructure.Services.SevicesLocator.Implementation;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Infrastructure.MonoComponents.UI.Windows.LevelSwithScript
@@ -7,6 +9,7 @@ namespace Infrastructure.MonoComponents.UI.Windows.LevelSwithScript
     {
         private readonly LevelSwithModel _levelSwithModel;
         //private LevelButtons _levelButtons;
+        private IPopupService _popupService = null;
 
         public LevelSwithControler(LevelSwithModel levelSwithModel)
         {
