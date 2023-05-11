@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Infrastructure.Services.SevicesLocator.Implementation;
 using Infrastructure.Services.StateMachine.Data;
 using Infrastructure.Services.StateMachine.States;
 
@@ -9,11 +10,11 @@ namespace Infrastructure.Services.StateMachine.Implementation
         private Dictionary<StateType, IState> _cachedState = null;
         private IState _currentState = null;
 
-        public StateMachine()
+        public StateMachine(ServiceLocator serviceLocator)
         {
             _cachedState = new Dictionary<StateType, IState>
             {
-                [StateType.InitializationState] = new AppInitializationState(this),
+                [StateType.InitializationState] = new AppInitializationState(this,serviceLocator),
                 [StateType.LoadingState] = new LoadingState(this),
                 [StateType.GameState] = new GameState(),
                 [StateType.PauseState] = new AppPauseState(),

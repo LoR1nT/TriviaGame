@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Assets.Scripts.Infrastructure.Services.AssetsProvider.Implementation;
+using Assets.Scripts.Infrastructure.Services.GameFactorys.Implementation;
 using Infrastructure.MonoComponents.UI.UIRoot;
 using Infrastructure.MonoComponents.UI.UIRoot.Data;
 using Infrastructure.Services.Windows.Container;
@@ -7,11 +9,13 @@ using UnityEngine;
 
 namespace Infrastructure.Services.Windows.Implementation
 {
-    public class WindowsService
+    public class WindowsService : IWindowsService
     {
         public bool HasAnyScreanOpened => _windowsConfigurations.Count > 0;
 
         private readonly IWindowsContainer _windowsContainer;
+        private readonly IAssetProvider _assetProvider;
+        private readonly IGameFactory _gameFactory;
         private List<WindowsConfiguration> _windowsConfigurations = null;
         private IUIRoot _uiRoot = null;
 
@@ -37,10 +41,10 @@ namespace Infrastructure.Services.Windows.Implementation
 
         private void SpawnWindow(WindowsConfiguration configuration)
         {
-            GameObject windowsOdject = Resources.Load<GameObject>(configuration.PrefabName);
+            GameObject windowsOdject = _assetProvider.GetObject(configuration.PrefabName);
             RectTransform windowRectTransform = _uiRoot.GetUIRoot(UIRootType.WindowsRoot);
 
-            configuration.Implementation = Object.Instantiate(windowsOdject,windowRectTransform);
+            configuration.Implementation = _gameFactory.SpawnPrefab(windowsOdject,windowRectTransform);
             _windowsConfigurations.Add(configuration);
         }
         

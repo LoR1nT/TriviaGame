@@ -3,7 +3,7 @@ using Infrastructure.Services.Windows.Data;
 
 namespace Infrastructure.Services.Windows.Container
 {
-    public class WindowsContainer
+    public class WindowsContainer : IWindowsContainer
     {
         private readonly Dictionary<WindowsType, WindowsConfiguration> _windowsContainer = null;
 
