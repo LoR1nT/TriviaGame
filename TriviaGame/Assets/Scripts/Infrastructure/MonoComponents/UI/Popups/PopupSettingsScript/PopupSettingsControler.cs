@@ -17,6 +17,11 @@ namespace Infrastructure.MonoComponents.UI.Popups.PopupSettingsScript
             InitializeButtons();
         }
 
+        public void UpdateData()
+        {
+            
+        }
+
         private void InitializeButtons()
         {
             _popupSettingsModel.CloseButton.onClick.AddListener(CloseSettings);

@@ -1,4 +1,4 @@
-using UnityEngine;
+using Assets.Scripts.Infrastructure.MonoComponents.UI.Popups.Base;
 
 namespace Infrastructure.Services.Popups.Data
 {
@@ -6,7 +6,7 @@ namespace Infrastructure.Services.Popups.Data
     {
         public string PopupName { get; } = string.Empty;
         public string PrefabName { get; } = string.Empty;
-        public GameObject Implementation { get; set; }
+        public IBasePopup Implementation { get; set; }
 
         public PopupConfiguration(string name, string prefabName)
         {

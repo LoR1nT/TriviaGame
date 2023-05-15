@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Assets.Scripts.Infrastructure.MonoComponents.UI.Popups.Base;
 using Assets.Scripts.Infrastructure.Services.AssetsProvider.Implementation;
 using Assets.Scripts.Infrastructure.Services.GameFactorys.Implementation;
 using Infrastructure.MonoComponents.UI.UIRoot;
@@ -47,13 +48,16 @@ namespace Infrastructure.Services.Popups.Implementation
             }
 
             SpawnPopup(config);
+            
+            config.Implementation.Initialize();
+            config.Implementation.Open();
         }
         private void SpawnPopup(PopupConfiguration config)
         {
             GameObject popupObject = _assetProvider.GetAsset<GameObject>(config.PrefabName);
             RectTransform parent = _uiRoot.GetUIRoot(UIRootType.PopupsRoot);
             
-            config.Implementation = _gameFactory.Create<GameObject>(popupObject,parent);
+            config.Implementation = _gameFactory.Create<IBasePopup>(popupObject,parent);
             _openedPopups.Add(config);
         }
 
@@ -62,7 +66,8 @@ namespace Infrastructure.Services.Popups.Implementation
             PopupConfiguration config = _popupContainer.GetPopupConfig(type);
             if (_openedPopups.Contains(config))
             {
-                Object.Destroy(config.Implementation);
+                config.Implementation.Dispose();
+                config.Implementation.Close();
                 _openedPopups.Remove(config);
             }
         }
