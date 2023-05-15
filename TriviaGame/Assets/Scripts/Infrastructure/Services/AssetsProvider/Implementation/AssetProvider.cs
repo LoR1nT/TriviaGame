@@ -1,13 +1,12 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.Infrastructure.Services.AssetsProvider.Implementation
 {
     public class AssetProvider : IAssetProvider
     {
-        public GameObject GetObject(string PrefabName)
+        public T GetAsset<T>(string PrefabName) where T : Object
         {
-            return Resources.Load<GameObject>(PrefabName);
+            return Resources.Load<T>(PrefabName);
         }
     }
 }

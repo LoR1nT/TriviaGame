@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Assets.Scripts.Infrastructure.Services.AssetsProvider.Implementation;
+using Assets.Scripts.Infrastructure.Services.GameFactorys.Implementation;
 using Infrastructure.MonoComponents.UI.UIRoot;
 using Infrastructure.MonoComponents.UI.UIRoot.Data;
 using Infrastructure.Services.Screans.Container;
@@ -12,11 +14,15 @@ namespace Infrastructure.Services.Screans.Implementation
         public bool HasAnyScreanOpened => _opendScreans.Count > 0;
 
         private readonly IScreanContainer _screanContainer;
+        private readonly IAssetProvider _assetProvider;
+        private readonly IGameFactory _gameFactory;
         private List<ScreanConfiguration> _opendScreans = null;
         private IUIRoot _uiRoot;
 
-        public ScreanService(IScreanContainer screanContainer, IUIRoot uiRoot)
+        public ScreanService(IScreanContainer screanContainer, IUIRoot uiRoot, IAssetProvider assetProvider, IGameFactory gameFactory)
         {
+            _assetProvider = assetProvider;
+            _gameFactory = gameFactory;
             _uiRoot = uiRoot;
             _screanContainer = screanContainer;
         }
@@ -35,10 +41,10 @@ namespace Infrastructure.Services.Screans.Implementation
 
         private void SpawnScrean(ScreanConfiguration config)
         {
-            GameObject screanObject = Resources.Load<GameObject>(config.PrefabName);
+            GameObject screanObject = _assetProvider.GetAsset<GameObject>(config.PrefabName);
             RectTransform screanRectTransform = _uiRoot.GetUIRoot(UIRootType.ScreensRoot);
 
-            config.Implementation = Object.Instantiate(screanObject,screanRectTransform);
+            config.Implementation = _gameFactory.Create<GameObject>(screanObject, screanRectTransform);
             _opendScreans.Add(config);
         }
 

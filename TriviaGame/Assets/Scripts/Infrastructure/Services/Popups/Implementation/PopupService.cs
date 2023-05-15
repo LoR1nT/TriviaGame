@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Assets.Scripts.Infrastructure.Services.AssetsProvider.Implementation;
+using Assets.Scripts.Infrastructure.Services.GameFactorys.Implementation;
 using Infrastructure.MonoComponents.UI.UIRoot;
 using Infrastructure.MonoComponents.UI.UIRoot.Data;
 using Infrastructure.Services.Popups.Container;
@@ -11,18 +13,22 @@ namespace Infrastructure.Services.Popups.Implementation
     {
         public bool HasAnyPopupsOpened => _openedPopups.Count > 0;
 
-        public PopupService(IPopupContainer popupContainer, IUIRoot uiRoot)
+        private readonly IPopupContainer _popupContainer = null;
+        private readonly IUIRoot _uiRoot = null;
+        private readonly IAssetProvider _assetProvider;
+        private readonly IGameFactory _gameFactory;
+        private List<PopupConfiguration> _openedPopups = null;
+        private Queue<PopupConfiguration> _popupQueue = null;
+
+        public PopupService(IPopupContainer popupContainer, IUIRoot uiRoot, IAssetProvider assetProvider, IGameFactory gameFactory)
         {
+            _gameFactory = gameFactory;
+            _assetProvider = assetProvider;
             _popupContainer = popupContainer;
             _uiRoot = uiRoot;
             _openedPopups = new List<PopupConfiguration>(4);
             _popupQueue = new Queue<PopupConfiguration>(4);
         }
-        
-        private readonly IPopupContainer _popupContainer = null;
-        private readonly IUIRoot _uiRoot = null;
-        private List<PopupConfiguration> _openedPopups = null;
-        private Queue<PopupConfiguration> _popupQueue = null;
 
         public void OpenPopup(PopupType type)
         {
@@ -44,10 +50,10 @@ namespace Infrastructure.Services.Popups.Implementation
         }
         private void SpawnPopup(PopupConfiguration config)
         {
-            GameObject popupObject = Resources.Load<GameObject>(config.PrefabName);
+            GameObject popupObject = _assetProvider.GetAsset<GameObject>(config.PrefabName);
             RectTransform parent = _uiRoot.GetUIRoot(UIRootType.PopupsRoot);
             
-            config.Implementation = Object.Instantiate(popupObject, parent);
+            config.Implementation = _gameFactory.Create<GameObject>(popupObject,parent);
             _openedPopups.Add(config);
         }
 

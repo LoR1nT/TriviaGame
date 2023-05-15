@@ -1,3 +1,5 @@
+using Assets.Scripts.Infrastructure.Services.AssetsProvider.Implementation;
+using Assets.Scripts.Infrastructure.Services.GameFactorys.Implementation;
 using Infrastructure.Services.Popups.Container;
 using Infrastructure.Services.Popups.Implementation;
 using Infrastructure.Services.Screans.Container;
@@ -30,9 +32,11 @@ namespace Infrastructure.Services.StateMachine.States
 
         private void RegisterServices()
         {
-            _serviceLocator.Register<IPopupService>(new PopupService(new PopupContainer(), null));
-            _serviceLocator.Register<IScreanService>(new ScreanService(new ScreanContainer(), null));
-            _serviceLocator.Register<IWindowsService>(new WindowsService(new WindowsContainer(), null));
+            _serviceLocator.Register<IGameFactory>(new GameFactory());
+            _serviceLocator.Register<IAssetProvider>(new AssetProvider());
+            _serviceLocator.Register<IPopupService>(new PopupService(new PopupContainer(), null, _serviceLocator.Single<IAssetProvider>(),_serviceLocator.Single<IGameFactory>()));
+            _serviceLocator.Register<IScreanService>(new ScreanService(new ScreanContainer(), null, _serviceLocator.Single<IAssetProvider>(), _serviceLocator.Single<IGameFactory>()));
+            _serviceLocator.Register<IWindowsService>(new WindowsService(new WindowsContainer(), null, _serviceLocator.Single<IAssetProvider>(), _serviceLocator.Single<IGameFactory>()));
         }
 
         public void Exit()

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Infrastructure.Services.SevicesLocator;
 using UnityEngine;
 
 namespace Assets.Scripts.Infrastructure.Services.AssetsProvider.Implementation
 {
-    public interface IAssetProvider
+    public interface IAssetProvider : IService
     {
-        public GameObject GetObject(string PrefabName);
+        public T GetAsset<T>(string PrefabName) where T : Object;
     }
 }

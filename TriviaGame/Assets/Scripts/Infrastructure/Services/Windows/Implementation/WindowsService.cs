@@ -19,8 +19,10 @@ namespace Infrastructure.Services.Windows.Implementation
         private List<WindowsConfiguration> _windowsConfigurations = null;
         private IUIRoot _uiRoot = null;
 
-        public WindowsService(IWindowsContainer windowsContainer, IUIRoot uiRoot)
+        public WindowsService(IWindowsContainer windowsContainer, IUIRoot uiRoot, IAssetProvider assetProvider, IGameFactory gameFactory)
         {
+            _assetProvider = assetProvider;
+            _gameFactory = gameFactory;
             _uiRoot = uiRoot;
             _windowsContainer = windowsContainer;
         }
@@ -41,10 +43,10 @@ namespace Infrastructure.Services.Windows.Implementation
 
         private void SpawnWindow(WindowsConfiguration configuration)
         {
-            GameObject windowsOdject = _assetProvider.GetObject(configuration.PrefabName);
+            GameObject windowsOdject = _assetProvider.GetAsset<GameObject>(configuration.PrefabName);
             RectTransform windowRectTransform = _uiRoot.GetUIRoot(UIRootType.WindowsRoot);
 
-            configuration.Implementation = _gameFactory.SpawnPrefab(windowsOdject,windowRectTransform);
+            configuration.Implementation = _gameFactory.Create<GameObject>(windowsOdject,windowRectTransform);
             _windowsConfigurations.Add(configuration);
         }
         
