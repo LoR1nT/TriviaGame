@@ -5,7 +5,6 @@ namespace Infrastructure.MonoComponents.UI.Popups.PopupSettingsScript
     public class PopupSettingsControler
     {
         private PopupSettingsModel _popupSettingsModel;
-        //private readonly int _maxLengOfBar = 248;
 
         public PopupSettingsControler(PopupSettingsModel popupSettingsModel)
         {
@@ -26,9 +25,11 @@ namespace Infrastructure.MonoComponents.UI.Popups.PopupSettingsScript
         {
             _popupSettingsModel.CloseButton.onClick.AddListener(CloseSettings);
             _popupSettingsModel.LanguageChange.onClick.AddListener(ChangeLanguage);
-            _popupSettingsModel.BGMButton.onClick.AddListener(ChangeVolumeBackGroundMusic);
-            _popupSettingsModel.SoundEffectButton.onClick.AddListener(ChangeVolumeSoundEffect);
+        }
 
+        private void CheckState()
+        {
+            
         }
 
         private void CloseSettings()
@@ -55,10 +56,7 @@ namespace Infrastructure.MonoComponents.UI.Popups.PopupSettingsScript
 
         public void Dispose()
         {
-            _popupSettingsModel.PopUpSettings.SetActive(false);
             _popupSettingsModel.CloseButton.onClick.RemoveAllListeners();
-            _popupSettingsModel.BGMButton.onClick.RemoveAllListeners();
-            _popupSettingsModel.SoundEffectButton.onClick.RemoveAllListeners();
             _popupSettingsModel.LanguageChange.onClick.RemoveAllListeners();
         }
 

@@ -7,26 +7,18 @@ namespace Infrastructure.MonoComponents.UI.Popups.PopupSettingsScript
     [Serializable]
     public class PopupSettingsModel
     {
-        [SerializeField] private RectTransform _bgmRectTransform;
-        [SerializeField] private RectTransform _soundEffectRectTransform;
-        [SerializeField] private Button _bgmButton;
-        [SerializeField] private Button _soundEffectButton;
+        [SerializeField] private Slider _bgmSlider;
+        [SerializeField] private Slider _soundEffectSlider;
         [SerializeField] private Button _languageChange;
         [SerializeField] private Button _closeButton;
-        [SerializeField] private GameObject _popupSettings;
+        [SerializeField] private Image _bmgHandle;
+        [SerializeField] private Image _soundEffectHandle;
 
-        public RectTransform BGMRectTransform { get { return _bgmRectTransform; } }
-
-        public RectTransform SoundEffectRectTransform { get { return _soundEffectRectTransform; } }
-
+        public Slider BGMSlider { get { return _bgmSlider; } }
+        public Slider SoundEffectSlider { get { return _soundEffectSlider; } }
         public Button LanguageChange { get { return _languageChange;} }
-
         public Button CloseButton { get { return _closeButton;} }
-
-        public Button BGMButton { get { return _bgmButton; } }
-
-        public Button SoundEffectButton { get { return _soundEffectButton; } }
-
-        public GameObject PopUpSettings { get { return _popupSettings; } }
+        public Image BMGHandle { get { return _bmgHandle; } }
+        public Image SoundEffectHandle { get { return _soundEffectHandle;} }
     }
 }

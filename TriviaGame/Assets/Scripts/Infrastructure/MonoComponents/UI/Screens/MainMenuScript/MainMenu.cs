@@ -1,26 +1,44 @@
+using Assets.Scripts.Infrastructure.MonoComponents.UI.Screens.Base;
 using UnityEngine;
 
 namespace Infrastructure.MonoComponents.UI.Screens.MainMenuScript
 {
-    public class MainMenu : MonoBehaviour
+    public class MainMenu : BaseScreen
     {
         [SerializeField] private MainMenuModel _mainMenuModel;
         private MainMenuControler _mainMenuControler;
 
-        private void Awake()
+        public override void Initialize()
         {
+            base.Initialize();
             _mainMenuControler = new MainMenuControler(_mainMenuModel);
-        }
-
-        private void Start()
-        {
             _mainMenuControler.Initialize();
         }
 
-        private void OnDisable()
+        public override void Open()
         {
-            _mainMenuControler.Dispose();
+            base.Open();
         }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+        }
+
+        //private void Awake()
+        //{
+        //    _mainMenuControler = new MainMenuControler(_mainMenuModel);
+        //}
+
+        //private void Start()
+        //{
+        //    _mainMenuControler.Initialize();
+        //}
+
+        //private void OnDisable()
+        //{
+        //    _mainMenuControler.Dispose();
+        //}
 
     }
 }

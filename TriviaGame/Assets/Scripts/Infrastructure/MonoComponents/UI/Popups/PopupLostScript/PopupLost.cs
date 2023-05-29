@@ -1,26 +1,46 @@
+using Assets.Scripts.Infrastructure.MonoComponents.UI.Popups.Base;
 using UnityEngine;
 
 namespace Infrastructure.MonoComponents.UI.Popups.PopupLostScript
 {
-    public class PopupLost : MonoBehaviour
+    public class PopupLost : BasePopup
     {
         [SerializeField] private PopupLostModel _popupLostModel;
         private PopupLostControler _popupLostControler;
 
-        private void Awake()
+        public override void Initialize()
         {
-            _popupLostControler = new PopupLostControler(_popupLostModel);
-        }
+            base.Initialize();
 
-        private void Start()
-        {
+            _popupLostControler = new PopupLostControler(_popupLostModel);
+            
             _popupLostControler.Initialize();
         }
 
-        private void OnDisable()
+        public override void Open()
         {
-            _popupLostControler.Dispose();
+            base.Open();
         }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+        }
+
+        //private void Awake()
+        //{
+        //    _popupLostControler = new PopupLostControler(_popupLostModel);
+        //}
+
+        //private void Start()
+        //{
+        //    _popupLostControler.Initialize();
+        //}
+
+        //private void OnDisable()
+        //{
+        //    _popupLostControler.Dispose();
+        //}
 
     }
 }

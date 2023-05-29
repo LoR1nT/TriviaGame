@@ -1,25 +1,47 @@
+using Assets.Scripts.Infrastructure.MonoComponents.UI.Popups.Base;
 using UnityEngine;
 
 namespace Infrastructure.MonoComponents.UI.Popups.PopupVictoryScript
 {
-    public class PopupVictory : MonoBehaviour
+    public class PopupVictory : BasePopup
     {
         [SerializeField] private PopupVictoryModel _popupVictoryModel;
         private PopupVictoryControler _popupVictoryControler;
 
-        private void Awake()
+        public override void Initialize()
         {
-            _popupVictoryControler = new PopupVictoryControler(_popupVictoryModel);
-        }
+            base.Initialize();
 
-        private void Start()
-        {
+            _popupVictoryControler = new PopupVictoryControler(_popupVictoryModel);
+
             _popupVictoryControler.Initialize();
         }
 
-        private void OnDisable()
+        public override void Open()
         {
+            base.Open();
+        }
+
+        public override void Dispose()
+        {
+            base.Dispose();
             _popupVictoryControler.Dispose();
         }
+
+
+        //private void Awake()
+        //{
+        //    _popupVictoryControler = new PopupVictoryControler(_popupVictoryModel);
+        //}
+
+        //private void Start()
+        //{
+        //    _popupVictoryControler.Initialize();
+        //}
+
+        //private void OnDisable()
+        //{
+        //    _popupVictoryControler.Dispose();
+        //}
     }
 }

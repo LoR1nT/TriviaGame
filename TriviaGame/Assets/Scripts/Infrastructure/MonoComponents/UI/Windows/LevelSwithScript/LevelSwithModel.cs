@@ -9,8 +9,6 @@ namespace Infrastructure.MonoComponents.UI.Windows.LevelSwithScript
     [Serializable]
     public class LevelSwithModel
     {
-        [SerializeField] private GameObject _levelSwithScrean;
-        [SerializeField] private GameObject _mainMenu;
         [SerializeField] private Button _backButton;
         [SerializeField] private TMP_Text _reachedContOfStars;
         [SerializeField] private TMP_Text _maxCountOfStars;

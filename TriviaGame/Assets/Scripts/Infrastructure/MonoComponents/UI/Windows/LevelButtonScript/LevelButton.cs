@@ -1,27 +1,45 @@
+using Assets.Scripts.Infrastructure.MonoComponents.UI.Windows.Base;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Infrastructure.MonoComponents.UI.Windows.LevelButtonScript
 {
-    public class LevelButton : MonoBehaviour
+    public class LevelButton : BaseWindows
     {
         [SerializeField] private LevelButtonModel _levelButtonModel;
         private LevelButtonControler _levelButtonControler;
 
-        private void Awake()
+        public override void Initialize()
         {
+            base.Initialize();
             _levelButtonControler = new LevelButtonControler(_levelButtonModel);
-        }
-
-        private void Start()
-        {
             _levelButtonControler.Initialize();
         }
 
-        private void OnDisable()
+        public override void Open()
         {
-            _levelButtonControler.Dispose();
+            base.Open();
         }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+        }
+
+        //private void Awake()
+        //{
+        //    _levelButtonControler = new LevelButtonControler(_levelButtonModel);
+        //}
+
+        //private void Start()
+        //{
+        //    _levelButtonControler.Initialize();
+        //}
+
+        //private void OnDisable()
+        //{
+        //    _levelButtonControler.Dispose();
+        //}
     }
 }
