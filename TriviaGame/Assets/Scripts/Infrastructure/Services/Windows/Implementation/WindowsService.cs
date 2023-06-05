@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Assets.Scripts.Infrastructure.MonoComponents.UI.Windows.Base;
 using Assets.Scripts.Infrastructure.Services.AssetsProvider.Implementation;
 using Assets.Scripts.Infrastructure.Services.GameFactorys.Implementation;
 using Infrastructure.MonoComponents.UI.UIRoot;
@@ -27,7 +28,7 @@ namespace Infrastructure.Services.Windows.Implementation
             _windowsContainer = windowsContainer;
         }
 
-        public void OpenWindow(WindowsType type)
+        public void OpenWindow<TWindow>(WindowsType type) where TWindow : BaseWindows
         {
             WindowsConfiguration configuration = _windowsContainer.GetWindowsConfig(type);
 
@@ -37,20 +38,20 @@ namespace Infrastructure.Services.Windows.Implementation
                 return;
             }
 
-            SpawnWindow(configuration);
+            SpawnWindow<TWindow>(configuration);
 
         }
 
-        private void SpawnWindow(WindowsConfiguration configuration)
+        private void SpawnWindow<TWindow>(WindowsConfiguration configuration) where TWindow : BaseWindows
         {
             GameObject windowsOdject = _assetProvider.GetAsset<GameObject>(configuration.PrefabName);
             RectTransform windowRectTransform = _uiRoot.GetUIRoot(UIRootType.WindowsRoot);
 
-            configuration.Implementation = _gameFactory.Create<GameObject>(windowsOdject,windowRectTransform);
+            configuration.Implementation = _gameFactory.Create<TWindow>(windowsOdject,windowRectTransform);
             _windowsConfigurations.Add(configuration);
         }
         
-        public void CloseWindow(WindowsType type)
+        public void CloseWindow<TWindow>(WindowsType type) where TWindow : BaseWindows
         {
             WindowsConfiguration configuration = _windowsContainer.GetWindowsConfig(type);
 

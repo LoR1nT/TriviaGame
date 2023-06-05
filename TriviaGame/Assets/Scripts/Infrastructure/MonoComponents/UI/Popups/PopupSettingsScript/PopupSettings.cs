@@ -30,25 +30,5 @@ namespace Infrastructure.MonoComponents.UI.Popups.PopupSettingsScript
             
             _popupSettingsControler.Dispose();
         }
-
-
-        /*
-        private void Awake()
-        {
-            _popupSettingsControler = new PopupSettingsControler(_popupSettingsModel);
-        }
-
-        private void Start()
-        {
-            _popupSettingsControler.Initialize();
-            
-        }
-
-        private void OnDisable()
-        {
-            _popupSettingsControler.Dispose();
-        }
-        */
-
     }
 }

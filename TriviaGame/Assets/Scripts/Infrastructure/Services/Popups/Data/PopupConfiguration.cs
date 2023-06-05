@@ -6,7 +6,7 @@ namespace Infrastructure.Services.Popups.Data
     {
         public string PopupName { get; } = string.Empty;
         public string PrefabName { get; } = string.Empty;
-        public IBasePopup Implementation { get; set; }
+        public BasePopup Implementation { get; set; }
 
         public PopupConfiguration(string name, string prefabName)
         {

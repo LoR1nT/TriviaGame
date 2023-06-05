@@ -26,20 +26,5 @@ namespace Assets.Scripts.Infrastructure.MonoComponents.UI.Windows.LevelButtonScr
         {
             base.Dispose();
         }
-
-        //private void Awake()
-        //{
-        //    _levelButtonControler = new LevelButtonControler(_levelButtonModel);
-        //}
-
-        //private void Start()
-        //{
-        //    _levelButtonControler.Initialize();
-        //}
-
-        //private void OnDisable()
-        //{
-        //    _levelButtonControler.Dispose();
-        //}
     }
 }

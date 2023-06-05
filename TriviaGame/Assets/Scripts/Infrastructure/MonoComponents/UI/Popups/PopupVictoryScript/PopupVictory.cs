@@ -27,21 +27,5 @@ namespace Infrastructure.MonoComponents.UI.Popups.PopupVictoryScript
             base.Dispose();
             _popupVictoryControler.Dispose();
         }
-
-
-        //private void Awake()
-        //{
-        //    _popupVictoryControler = new PopupVictoryControler(_popupVictoryModel);
-        //}
-
-        //private void Start()
-        //{
-        //    _popupVictoryControler.Initialize();
-        //}
-
-        //private void OnDisable()
-        //{
-        //    _popupVictoryControler.Dispose();
-        //}
     }
 }

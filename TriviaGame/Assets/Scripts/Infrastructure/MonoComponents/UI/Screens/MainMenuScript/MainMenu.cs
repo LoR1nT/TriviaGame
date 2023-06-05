@@ -24,21 +24,5 @@ namespace Infrastructure.MonoComponents.UI.Screens.MainMenuScript
         {
             base.Dispose();
         }
-
-        //private void Awake()
-        //{
-        //    _mainMenuControler = new MainMenuControler(_mainMenuModel);
-        //}
-
-        //private void Start()
-        //{
-        //    _mainMenuControler.Initialize();
-        //}
-
-        //private void OnDisable()
-        //{
-        //    _mainMenuControler.Dispose();
-        //}
-
     }
 }

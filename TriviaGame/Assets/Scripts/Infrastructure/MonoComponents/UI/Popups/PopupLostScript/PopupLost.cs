@@ -26,21 +26,5 @@ namespace Infrastructure.MonoComponents.UI.Popups.PopupLostScript
         {
             base.Dispose();
         }
-
-        //private void Awake()
-        //{
-        //    _popupLostControler = new PopupLostControler(_popupLostModel);
-        //}
-
-        //private void Start()
-        //{
-        //    _popupLostControler.Initialize();
-        //}
-
-        //private void OnDisable()
-        //{
-        //    _popupLostControler.Dispose();
-        //}
-
     }
 }

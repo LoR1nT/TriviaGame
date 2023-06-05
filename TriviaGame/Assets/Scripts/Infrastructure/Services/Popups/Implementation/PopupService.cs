@@ -6,6 +6,7 @@ using Infrastructure.MonoComponents.UI.UIRoot;
 using Infrastructure.MonoComponents.UI.UIRoot.Data;
 using Infrastructure.Services.Popups.Container;
 using Infrastructure.Services.Popups.Data;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 namespace Infrastructure.Services.Popups.Implementation
@@ -31,7 +32,7 @@ namespace Infrastructure.Services.Popups.Implementation
             _popupQueue = new Queue<PopupConfiguration>(4);
         }
 
-        public void OpenPopup(PopupType type)
+        public void OpenPopup<TPopup>(PopupType type) where TPopup : BasePopup
         {
             PopupConfiguration config = _popupContainer.GetPopupConfig(type);
 
@@ -47,17 +48,17 @@ namespace Infrastructure.Services.Popups.Implementation
                 return;
             }
 
-            SpawnPopup(config);
+            SpawnPopup<TPopup>(config);
             
             config.Implementation.Initialize();
             config.Implementation.Open();
         }
-        private void SpawnPopup(PopupConfiguration config)
+        private void SpawnPopup<TPopup>(PopupConfiguration config) where TPopup : BasePopup
         {
             GameObject popupObject = _assetProvider.GetAsset<GameObject>(config.PrefabName);
             RectTransform parent = _uiRoot.GetUIRoot(UIRootType.PopupsRoot);
             
-            config.Implementation = _gameFactory.Create<IBasePopup>(popupObject,parent);
+            config.Implementation = _gameFactory.Create<TPopup>(popupObject,parent);
             _openedPopups.Add(config);
         }
 
@@ -74,6 +75,12 @@ namespace Infrastructure.Services.Popups.Implementation
 
         public void ClosePopupOnTop()
         {
+            PopupConfiguration _popupOnTopConfig = _popupQueue.Dequeue();
+            if (_openedPopups.Contains(_popupOnTopConfig))
+            {
+                _popupOnTopConfig.Implementation.Dispose();
+                _popupOnTopConfig.Implementation.Close();
+            }
         }
 
     }

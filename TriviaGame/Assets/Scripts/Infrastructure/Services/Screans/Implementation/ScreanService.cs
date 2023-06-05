@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Assets.Scripts.Infrastructure.MonoComponents.UI.Screens.Base;
 using Assets.Scripts.Infrastructure.Services.AssetsProvider.Implementation;
 using Assets.Scripts.Infrastructure.Services.GameFactorys.Implementation;
 using Infrastructure.MonoComponents.UI.UIRoot;
@@ -27,7 +28,7 @@ namespace Infrastructure.Services.Screans.Implementation
             _screanContainer = screanContainer;
         }
 
-        public void OpenScrean(ScreanType type)
+        public void OpenScrean<TScreen>(ScreanType type) where TScreen : BaseScreen
         {
             ScreanConfiguration config = _screanContainer.GetScreanConfig(type);
             if (config == null)
@@ -36,15 +37,15 @@ namespace Infrastructure.Services.Screans.Implementation
                 return;
             }
 
-            SpawnScrean(config);
+            SpawnScrean<TScreen>(config);
         }
 
-        private void SpawnScrean(ScreanConfiguration config)
+        private void SpawnScrean<TScreen>(ScreanConfiguration config) where TScreen : BaseScreen
         {
             GameObject screanObject = _assetProvider.GetAsset<GameObject>(config.PrefabName);
             RectTransform screanRectTransform = _uiRoot.GetUIRoot(UIRootType.ScreensRoot);
 
-            config.Implementation = _gameFactory.Create<GameObject>(screanObject, screanRectTransform);
+            config.Implementation = _gameFactory.Create<TScreen>(screanObject, screanRectTransform);
             _opendScreans.Add(config);
         }
 

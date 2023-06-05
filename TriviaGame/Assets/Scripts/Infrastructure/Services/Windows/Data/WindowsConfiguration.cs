@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Infrastructure.MonoComponents.UI.Windows.Base;
+using UnityEngine;
 
 namespace Infrastructure.Services.Windows.Data
 {
@@ -6,7 +7,7 @@ namespace Infrastructure.Services.Windows.Data
     {
         public string WindowsName { get; } = string.Empty;
         public string PrefabName { get; } = string.Empty;
-        public GameObject Implementation { get; set; }
+        public BaseWindows Implementation { get; set; }
 
         public WindowsConfiguration(string name, string prefabName)
         {

@@ -25,21 +25,5 @@ namespace Infrastructure.MonoComponents.UI.Windows.LevelSwithScript
             base.Dispose();
             _levelSwithControler.Dispose();
         }
-
-        //private void Awake()
-        //{
-        //    _levelSwithControler = new LevelSwithControler(_levelSwithModel);
-        //}
-
-        //private void Start()
-        //{
-        //    _levelSwithControler.Initialize();
-        //}
-
-        //private void OnDisable()
-        //{
-        //    _levelSwithControler.Dispose();
-        //}
-
     }
 }
