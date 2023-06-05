@@ -4,9 +4,9 @@ namespace Assets.Scripts.Infrastructure.Services.AssetsProvider.Implementation
 {
     public class AssetProvider : IAssetProvider
     {
-        public T GetAsset<T>(string PrefabName) where T : Object
+        public T GetAsset<T>(string prefabName) where T : Object
         {
-            return Resources.Load<T>(PrefabName);
+            return Resources.Load<T>(prefabName);
         }
     }
 }

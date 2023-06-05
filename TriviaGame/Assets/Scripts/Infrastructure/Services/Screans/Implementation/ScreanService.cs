@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Assets.Scripts.Infrastructure.MonoComponents.UI.Screens.Base;
 using Assets.Scripts.Infrastructure.Services.AssetsProvider.Implementation;
 using Assets.Scripts.Infrastructure.Services.GameFactorys.Implementation;
@@ -7,6 +8,7 @@ using Infrastructure.MonoComponents.UI.UIRoot.Data;
 using Infrastructure.Services.Screans.Container;
 using Infrastructure.Services.Screans.Data;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Infrastructure.Services.Screans.Implementation
 {
@@ -19,6 +21,7 @@ namespace Infrastructure.Services.Screans.Implementation
         private readonly IGameFactory _gameFactory;
         private List<ScreanConfiguration> _opendScreans = null;
         private IUIRoot _uiRoot;
+        private Action _onScreenClosedAction = null;
 
         public ScreanService(IScreanContainer screanContainer, IUIRoot uiRoot, IAssetProvider assetProvider, IGameFactory gameFactory)
         {
@@ -26,17 +29,22 @@ namespace Infrastructure.Services.Screans.Implementation
             _gameFactory = gameFactory;
             _uiRoot = uiRoot;
             _screanContainer = screanContainer;
+
+            _opendScreans = new List<ScreanConfiguration>();
         }
 
-        public void OpenScrean<TScreen>(ScreanType type) where TScreen : BaseScreen
+        public void OpenScrean<TScreen>(ScreanType type, Action onScreenClosed = null) where TScreen : BaseScreen
         {
             ScreanConfiguration config = _screanContainer.GetScreanConfig(type);
+            
             if (config == null)
             {
                 Debug.LogError("NO SUCH A PREFAB FOUND");
                 return;
             }
 
+            _onScreenClosedAction = onScreenClosed;
+            
             SpawnScrean<TScreen>(config);
         }
 
@@ -46,6 +54,10 @@ namespace Infrastructure.Services.Screans.Implementation
             RectTransform screanRectTransform = _uiRoot.GetUIRoot(UIRootType.ScreensRoot);
 
             config.Implementation = _gameFactory.Create<TScreen>(screanObject, screanRectTransform);
+            
+            config.Implementation.Initialize();
+            config.Implementation.Open();
+            
             _opendScreans.Add(config);
         }
 
@@ -54,6 +66,14 @@ namespace Infrastructure.Services.Screans.Implementation
             ScreanConfiguration config = _screanContainer.GetScreanConfig(type);
             if (_opendScreans.Contains(config))
             {
+                config.Implementation.Dispose();
+                config.Implementation.Hide();
+
+                if (_onScreenClosedAction != null)
+                {
+                    _onScreenClosedAction.Invoke();
+                }
+                
                 Object.Destroy(config.Implementation);
                 _opendScreans.Remove(config);
             }

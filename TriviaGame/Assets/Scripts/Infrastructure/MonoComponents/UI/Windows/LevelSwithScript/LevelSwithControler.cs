@@ -1,5 +1,4 @@
 ﻿using Infrastructure.Services.Popups.Implementation;
-using Infrastructure.Services.SevicesLocator.Implementation;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,7 +18,6 @@ namespace Infrastructure.MonoComponents.UI.Windows.LevelSwithScript
 
         public void Initialize()
         {
-            _levelSwithModel.MainMenu.SetActive(false);
             InitializeButtons();
         }
 
@@ -48,8 +46,6 @@ namespace Infrastructure.MonoComponents.UI.Windows.LevelSwithScript
 
         public void Dispose()
         {
-            _levelSwithModel.MainMenu.SetActive(true);
-            _levelSwithModel.LevelSwithScrean.SetActive(false);
             DisposeButtons();
         }
 

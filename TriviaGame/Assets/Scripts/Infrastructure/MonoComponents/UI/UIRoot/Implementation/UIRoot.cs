@@ -14,7 +14,12 @@ namespace Infrastructure.MonoComponents.UI.UIRoot.Implementation
 
         [Header("Popups")]
         [SerializeField] private RectTransform _popupsRoot = null;
-        
+
+        private void Awake()
+        {
+            DontDestroyOnLoad(this);
+        }
+
         public RectTransform GetUIRoot(UIRootType type)
         {
             switch (type)

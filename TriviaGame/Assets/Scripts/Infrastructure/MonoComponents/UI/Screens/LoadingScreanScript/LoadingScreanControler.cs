@@ -1,4 +1,6 @@
 ﻿using DG.Tweening;
+using Infrastructure.Services.Screans.Data;
+using Infrastructure.Services.Screans.Implementation;
 using UnityEngine;
 using Sequence = DG.Tweening.Sequence;
 
@@ -8,26 +10,35 @@ namespace Infrastructure.MonoComponents.UI.Screens.LoadingScreanScript
     {
         public const int MaxLengthOfBar = 990;
         private LoadingScreanModel _loadingScreanModel;
+        private readonly IScreanService _screanService = null;
+        private Sequence _loadingBarSequence = null;
 
-        public LoadingScreanControler(LoadingScreanModel loadingScreanModel)
+        public LoadingScreanControler(LoadingScreanModel loadingScreanModel, IScreanService screanService)
         {
             _loadingScreanModel = loadingScreanModel;
+            _screanService = screanService;
         }
 
         public void Initialize()
         {
-            LoadingBarChange();
+            CreateLoadingSequence();
         }
 
-        private  void LoadingBarChange()
+        public void Show()
         {
-            Sequence loadingBarSequence = DOTween.Sequence();
-            loadingBarSequence.SetRecyclable(true);
-            loadingBarSequence.AppendInterval(1f);
-            loadingBarSequence.Append(LoadingBarAnimation());;
-            loadingBarSequence.AppendInterval(1f);
-            loadingBarSequence.AppendCallback(() =>
+            _loadingBarSequence.Play();
+        }
+
+        private void CreateLoadingSequence()
+        {
+            _loadingBarSequence = DOTween.Sequence();
+            _loadingBarSequence.SetRecyclable(true);
+            _loadingBarSequence.AppendInterval(1f);
+            _loadingBarSequence.Append(LoadingBarAnimation());;
+            _loadingBarSequence.AppendInterval(1f);
+            _loadingBarSequence.AppendCallback(() =>
             {
+                CloseScreen();
                 Debug.Log("Loading Finished");
             });
         }
@@ -40,9 +51,14 @@ namespace Infrastructure.MonoComponents.UI.Screens.LoadingScreanScript
                 .SetRecyclable(true);
         }
 
+        private void CloseScreen()
+        {
+            _screanService.CloseScrean(ScreanType.LoadingScrean);
+        }
+
         public void Dispose()
         {
-
+            _loadingBarSequence.Kill();
         }
     }
 }

@@ -28,6 +28,7 @@ namespace Infrastructure.Services.Popups.Implementation
             _assetProvider = assetProvider;
             _popupContainer = popupContainer;
             _uiRoot = uiRoot;
+            
             _openedPopups = new List<PopupConfiguration>(4);
             _popupQueue = new Queue<PopupConfiguration>(4);
         }

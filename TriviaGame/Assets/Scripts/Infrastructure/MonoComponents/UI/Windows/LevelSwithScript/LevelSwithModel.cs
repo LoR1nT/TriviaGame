@@ -14,7 +14,6 @@ namespace Infrastructure.MonoComponents.UI.Windows.LevelSwithScript
         [SerializeField] private TMP_Text _maxCountOfStars;
         [SerializeField] private List<Button> _levelsButtons;
 
-        public GameObject LevelSwithScrean { get { return _levelSwithScrean; } }
         public Button BackButton { get { return _backButton; } }
         public TMP_Text ReachedContOfStars { get { return _reachedContOfStars; } }
         public TMP_Text MaxCountOfStars { get { return _maxCountOfStars; } }

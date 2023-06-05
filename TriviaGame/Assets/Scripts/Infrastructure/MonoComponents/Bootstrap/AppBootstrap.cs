@@ -8,7 +8,6 @@ namespace Infrastructure.MonoComponents.Bootstrap
     {
 
         private Game _game = null;
-
         
         private void Awake()
         {

@@ -26,6 +26,7 @@ namespace Infrastructure.Services.Windows.Implementation
             _gameFactory = gameFactory;
             _uiRoot = uiRoot;
             _windowsContainer = windowsContainer;
+            _windowsConfigurations = new List<WindowsConfiguration>();
         }
 
         public void OpenWindow<TWindow>(WindowsType type) where TWindow : BaseWindows
