@@ -8,7 +8,6 @@ using Infrastructure.MonoComponents.UI.UIRoot.Data;
 using Infrastructure.Services.Screans.Container;
 using Infrastructure.Services.Screans.Data;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Infrastructure.Services.Screans.Implementation
 {
@@ -50,15 +49,28 @@ namespace Infrastructure.Services.Screans.Implementation
 
         private void SpawnScrean<TScreen>(ScreanConfiguration config) where TScreen : BaseScreen
         {
-            GameObject screanObject = _assetProvider.GetAsset<GameObject>(config.PrefabName);
-            RectTransform screanRectTransform = _uiRoot.GetUIRoot(UIRootType.ScreensRoot);
+            if (!HasOpenedScreen(config))
+            {
+                GameObject screanObject = _assetProvider.GetAsset<GameObject>(config.PrefabName);
+                RectTransform screanRectTransform = _uiRoot.GetUIRoot(UIRootType.ScreensRoot);
 
-            config.Implementation = _gameFactory.Create<TScreen>(screanObject, screanRectTransform);
+                config.Implementation = _gameFactory.Create<TScreen>(screanObject, screanRectTransform);
             
-            config.Implementation.Initialize();
+                config.Implementation.Initialize();
+                _opendScreans.Add(config);
+            }
+            
             config.Implementation.Open();
-            
-            _opendScreans.Add(config);
+        }
+
+        private bool HasOpenedScreen(ScreanConfiguration configuration)
+        {
+            if (_opendScreans.Contains(configuration))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public void CloseScrean(ScreanType type)
@@ -66,16 +78,12 @@ namespace Infrastructure.Services.Screans.Implementation
             ScreanConfiguration config = _screanContainer.GetScreanConfig(type);
             if (_opendScreans.Contains(config))
             {
-                config.Implementation.Dispose();
                 config.Implementation.Hide();
 
                 if (_onScreenClosedAction != null)
                 {
                     _onScreenClosedAction.Invoke();
                 }
-                
-                Object.Destroy(config.Implementation);
-                _opendScreans.Remove(config);
             }
         }
 
