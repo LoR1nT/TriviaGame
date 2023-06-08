@@ -1,4 +1,7 @@
 using Assets.Scripts.Infrastructure.MonoComponents.UI.Screens.Base;
+using Infrastructure.Services.Popups.Implementation;
+using Infrastructure.Services.Screans.Implementation;
+using Infrastructure.Services.SevicesLocator.Implementation;
 using UnityEngine;
 
 namespace Infrastructure.MonoComponents.UI.Screens.MainMenuScript
@@ -11,7 +14,7 @@ namespace Infrastructure.MonoComponents.UI.Screens.MainMenuScript
         public override void Initialize()
         {
             base.Initialize();
-            _mainMenuControler = new MainMenuControler(_mainMenuModel);
+            _mainMenuControler = new MainMenuControler(_mainMenuModel, ServiceLocator.Container.Single<IScreanService>(),ServiceLocator.Container.Single<IPopupService>());
             _mainMenuControler.Initialize();
         }
 

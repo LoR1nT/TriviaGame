@@ -361,7 +361,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2167845914119187688
 RectTransform:
   m_ObjectHideFlags: 0
@@ -534,7 +534,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2167845914406209082
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1500,6 +1500,7 @@ MonoBehaviour:
   _levelsScreanModel:
     _levelSwithHeader: {fileID: 2167845914406209083}
     _playLevelHeader: {fileID: 2167845914119187689}
+    _backButton: {fileID: 2167845915119821628}
 --- !u!1 &2167845915542538799
 GameObject:
   m_ObjectHideFlags: 0

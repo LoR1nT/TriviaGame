@@ -33,7 +33,6 @@ namespace Infrastructure.MonoComponents.UI.Screens.LoadingScreanScript
         {
             _loadingBarSequence = DOTween.Sequence();
             _loadingBarSequence.SetRecyclable(true);
-            _loadingBarSequence.AppendInterval(1f);
             _loadingBarSequence.Append(LoadingBarAnimation());;
             _loadingBarSequence.AppendInterval(1f);
             _loadingBarSequence.AppendCallback(() =>
