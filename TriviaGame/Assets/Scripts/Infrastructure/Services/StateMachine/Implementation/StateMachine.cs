@@ -17,8 +17,6 @@ namespace Infrastructure.Services.StateMachine.Implementation
                 [StateType.InitializationState] = new AppInitializationState(this,serviceLocator),
                 [StateType.LoadingState] = new LoadingState(this),
                 [StateType.GameState] = new GameState(),
-                [StateType.PauseState] = new AppPauseState(),
-                [StateType.QuitState] = new AppQuitState(),
             };
         }
 

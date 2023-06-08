@@ -26,12 +26,14 @@ namespace Infrastructure.Services.SevicesLocator.Implementation
             _cachedServices = new Dictionary<Type, IService>();
         }
 
-        public void Register<TService>(TService implementation) where TService : IService
+        public TService Register<TService>(TService implementation) where TService : class, IService
         {
             if (_cachedServices.ContainsKey(typeof(TService)))
-                return;
+                return _cachedServices[typeof(TService)] as TService;
             
             _cachedServices.Add(typeof(TService), implementation);
+
+            return implementation;
         }
 
         public TService Single<TService>() where TService : class, IService

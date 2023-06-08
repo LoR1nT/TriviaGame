@@ -5,7 +5,5 @@ namespace Infrastructure.Services.StateMachine.Data
         InitializationState,
         LoadingState,
         GameState,
-        PauseState,
-        QuitState,
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using Assets.Scripts.Infrastructure.Services.AssetsProvider.Implementation;
 using Assets.Scripts.Infrastructure.Services.GameFactorys.Implementation;
 using Assets.Scripts.Infrastructure.Services.SceneLoader;
@@ -23,63 +22,68 @@ namespace Infrastructure.Services.StateMachine.States
 {
     public class AppInitializationState : IState
     {
+        private const string MAIN_SCENE_NAME = "Main";
+        private const string UI_ROOT_PATH = "UI_Root/UI_Root";
         private readonly IStateMachine _stateMachine = null;
         private ServiceLocator _serviceLocator = null;
+        
+        private IUIRoot _uiRoot = null;
+        private ISceneLoaderService _sceneLoaderService = null;
+        private IAssetProvider _assetProvider = null;
+        private IGameFactory _gameFactory = null;
+        private IScreanService _screanService = null;
 
         public AppInitializationState(IStateMachine stateMachine, ServiceLocator serviceLocator)
         {
             _serviceLocator = serviceLocator;
             _stateMachine = stateMachine;
-
-            RegisterServices();
         }
         
         public void Enter()
         {
+            RegisterServices();
+
+            CreateUIRoot();
+
+            RegisterUI();
+            
             LoadGameScene();
         }
 
         private void LoadGameScene()
         {
-            var sceneLoader = _serviceLocator.Single<ISceneLoaderService>();
-            var screenService = _serviceLocator.Single<IScreanService>();
-
-            sceneLoader.LoadScene("Main", LoadSceneMode.Single);
+            _sceneLoaderService.LoadScene(MAIN_SCENE_NAME, LoadSceneMode.Single);
             
-            screenService.OpenScrean<LoadingScrean>(ScreanType.LoadingScrean, onScreenClosed: OpenMainMenu);
+            _screanService.OpenScrean<LoadingScrean>(ScreanType.LoadingScrean, onScreenClosed: OpenMainMenu);
 
             _stateMachine.ChangeState(StateType.GameState);
         }
 
         private void OpenMainMenu()
         {
-            var screenService = _serviceLocator.Single<IScreanService>();
-            
-            screenService.OpenScrean<MainMenu>(ScreanType.MainMenuScrean);
+            _screanService.OpenScrean<MainMenu>(ScreanType.MainMenuScrean);
         }
 
         private void RegisterServices()
         {
-            _serviceLocator.Register<ISceneLoaderService>(new SceneLoaderService());
-            _serviceLocator.Register<IAssetProvider>(new AssetProvider());
-            _serviceLocator.Register<IGameFactory>(new GameFactory());
-
-            CreateUIRoot();
-            
-            _serviceLocator.Register<IPopupService>(new PopupService(new PopupContainer(), _serviceLocator.Single<IUIRoot>(), _serviceLocator.Single<IAssetProvider>(),_serviceLocator.Single<IGameFactory>()));
-            _serviceLocator.Register<IScreanService>(new ScreanService(new ScreanContainer(), _serviceLocator.Single<IUIRoot>(), _serviceLocator.Single<IAssetProvider>(), _serviceLocator.Single<IGameFactory>()));
-            _serviceLocator.Register<IWindowsService>(new WindowsService(new WindowsContainer(), _serviceLocator.Single<IUIRoot>(), _serviceLocator.Single<IAssetProvider>(), _serviceLocator.Single<IGameFactory>()));
+            _sceneLoaderService = _serviceLocator.Register<ISceneLoaderService>(new SceneLoaderService());
+            _assetProvider = _serviceLocator.Register<IAssetProvider>(new AssetProvider());
+            _gameFactory = _serviceLocator.Register<IGameFactory>(new GameFactory());
         }
 
         private void CreateUIRoot()
         {
-            var assetProvider = _serviceLocator.Single<IAssetProvider>();
-            var gameFactory = _serviceLocator.Single<IGameFactory>();
+            GameObject uiRootObject = _assetProvider.GetAsset<GameObject>(UI_ROOT_PATH);
+            _uiRoot = _gameFactory.Create<IUIRoot>(uiRootObject);
+        }
 
-            GameObject uiRootObject = assetProvider.GetAsset<GameObject>("UI_Root/UI_Root");
-            IUIRoot uiRoot = gameFactory.Create<IUIRoot>(uiRootObject);
+        private void RegisterUI()
+        {
+            _serviceLocator.Register<IUIRoot>(_uiRoot);
             
-            _serviceLocator.Register<IUIRoot>(uiRoot);
+            _serviceLocator.Register<IPopupService>(new PopupService(new PopupContainer(), _uiRoot, _assetProvider,_gameFactory));
+            _screanService = _serviceLocator.Register<IScreanService>(new ScreanService(new ScreanContainer(), _uiRoot, _assetProvider, _gameFactory));
+            _serviceLocator.Register<IWindowsService>(new WindowsService(new WindowsContainer(), _uiRoot, _assetProvider, _gameFactory));
         }
 
         public void Exit()
