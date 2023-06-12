@@ -18,6 +18,11 @@ namespace Assets.Scripts.Infrastructure.MonoComponents.UI.Windows.LevelButtonScr
             _levelButtonControler.Initialize();
         }
 
+        public void Data(int level, int score = 0)
+        {
+            _levelButtonControler.DataTransfer(level, score);
+        }
+
         private void OnDestroy()
         {
             _levelButtonControler.Dispose();

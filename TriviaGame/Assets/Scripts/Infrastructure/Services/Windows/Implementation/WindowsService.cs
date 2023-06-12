@@ -50,16 +50,19 @@ namespace Infrastructure.Services.Windows.Implementation
 
             configuration.Implementation = _gameFactory.Create<TWindow>(windowsOdject,windowRectTransform);
             _windowsConfigurations.Add(configuration);
+            configuration.Implementation.Initialize();
+            configuration.Implementation.Open();
         }
         
-        public void CloseWindow<TWindow>(WindowsType type) where TWindow : BaseWindows
+        public void CloseWindow(WindowsType type)
         {
             WindowsConfiguration configuration = _windowsContainer.GetWindowsConfig(type);
 
             if (_windowsConfigurations.Contains(configuration))
             {
-                Object.Destroy(configuration.Implementation);
+                configuration.Implementation.Dispose();
                 _windowsConfigurations.Remove(configuration);
+                configuration.Implementation.Close();
             }
 
         }

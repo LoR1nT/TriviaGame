@@ -8,6 +8,6 @@ namespace Infrastructure.Services.Windows.Implementation
     {
         public bool HasAnyScreanOpened { get; }
         public void OpenWindow<TWindow>(WindowsType type) where TWindow : BaseWindows;
-        public void CloseWindow<TWindow>(WindowsType type) where TWindow : BaseWindows;
+        public void CloseWindow(WindowsType type);
     }
 }

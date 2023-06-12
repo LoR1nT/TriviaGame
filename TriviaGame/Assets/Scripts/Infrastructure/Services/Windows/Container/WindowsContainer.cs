@@ -12,7 +12,7 @@ namespace Infrastructure.Services.Windows.Container
             _windowsContainer = new Dictionary<WindowsType, WindowsConfiguration>
             {
                 [WindowsType.LevelSwitch] = new WindowsConfiguration("LevelSwitch Windows", "Windows/LevelSwithWindows/LevelSwith_Window"),
-                [WindowsType.PlayLavel] = new WindowsConfiguration("PlayLavel Window", "Windows/PlayLevelWindows/PlayLevel_Window"),
+                [WindowsType.PlayLavel] = new WindowsConfiguration("PlayLavel Window", "Windows/PlayLevelWindows/PlayLevel_Window")
             };
         }
 
