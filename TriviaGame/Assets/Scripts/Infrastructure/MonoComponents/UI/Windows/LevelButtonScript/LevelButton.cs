@@ -1,3 +1,8 @@
+using Assets.Scripts.Infrastructure.Services.AssetsProvider.Implementation;
+using Assets.Scripts.Infrastructure.Services.LevelDataBase.Implementation;
+using Assets.Scripts.Infrastructure.Services.LevelGamePlay.Imlementation;
+using Infrastructure.Services.SevicesLocator.Implementation;
+using Infrastructure.Services.Windows.Implementation;
 using UnityEngine;
 
 namespace Assets.Scripts.Infrastructure.MonoComponents.UI.Windows.LevelButtonScript
@@ -9,7 +14,7 @@ namespace Assets.Scripts.Infrastructure.MonoComponents.UI.Windows.LevelButtonScr
 
         private void Awake()
         {
-            _levelButtonControler = new LevelButtonControler(_levelButtonModel);
+            _levelButtonControler = new LevelButtonControler(_levelButtonModel, ServiceLocator.Container.Single<IWindowsService>(), ServiceLocator.Container.Single<ILevelGamePlayService>());
             
         }
 
@@ -18,9 +23,9 @@ namespace Assets.Scripts.Infrastructure.MonoComponents.UI.Windows.LevelButtonScr
             _levelButtonControler.Initialize();
         }
 
-        public void Data(int level, int score = 0)
+        public void Data(int level)
         {
-            _levelButtonControler.DataTransfer(level, score);
+            _levelButtonControler.DataTransfer(level);
         }
 
         private void OnDestroy()

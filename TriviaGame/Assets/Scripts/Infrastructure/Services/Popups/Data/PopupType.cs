@@ -5,5 +5,6 @@ namespace Infrastructure.Services.Popups.Data
         SettingsPopup,
         VicrotyPopup,
         LostPopup,
+        NextQuestionPopup
     }
 }

@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using Assets.Scripts.Infrastructure.MonoComponents.UI.Windows.Base;
+﻿using Assets.Scripts.Infrastructure.MonoComponents.UI.Windows.Base;
 using Assets.Scripts.Infrastructure.Services.AssetsProvider.Implementation;
 using Assets.Scripts.Infrastructure.Services.GameFactorys.Implementation;
 using Infrastructure.MonoComponents.UI.UIRoot;
 using Infrastructure.MonoComponents.UI.UIRoot.Data;
 using Infrastructure.Services.Windows.Container;
 using Infrastructure.Services.Windows.Data;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Infrastructure.Services.Windows.Implementation
@@ -36,24 +36,25 @@ namespace Infrastructure.Services.Windows.Implementation
             if (configuration == null)
             {
                 Debug.LogError("NO SUCH A PREFAB FOUND");
-                return;
             }
 
             SpawnWindow<TWindow>(configuration);
 
         }
 
+
+
         private void SpawnWindow<TWindow>(WindowsConfiguration configuration) where TWindow : BaseWindows
         {
             GameObject windowsOdject = _assetProvider.GetAsset<GameObject>(configuration.PrefabName);
             RectTransform windowRectTransform = _uiRoot.GetUIRoot(UIRootType.WindowsRoot);
 
-            configuration.Implementation = _gameFactory.Create<TWindow>(windowsOdject,windowRectTransform);
+            configuration.Implementation = _gameFactory.Create<TWindow>(windowsOdject, windowRectTransform);
             _windowsConfigurations.Add(configuration);
             configuration.Implementation.Initialize();
             configuration.Implementation.Open();
         }
-        
+
         public void CloseWindow(WindowsType type)
         {
             WindowsConfiguration configuration = _windowsContainer.GetWindowsConfig(type);

@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Infrastructure.MonoComponents.UI.Screens.Base;
+using Assets.Scripts.Infrastructure.Services.LevelGamePlay.Imlementation;
 using Infrastructure.Services.Screans.Implementation;
 using Infrastructure.Services.SevicesLocator.Implementation;
 using Infrastructure.Services.Windows.Implementation;
@@ -14,7 +15,7 @@ namespace Assets.Scripts.Infrastructure.MonoComponents.UI.Screens.LevelsScreanSc
         public override void Initialize()
         {
             base.Initialize();
-            _levelsScreanControler = new LevelsScreanControler(_levelsScreanModel, ServiceLocator.Container.Single<IScreanService>(), ServiceLocator.Container.Single<IWindowsService>());
+            _levelsScreanControler = new LevelsScreanControler(_levelsScreanModel, ServiceLocator.Container.Single<IScreanService>(), ServiceLocator.Container.Single<IWindowsService>(), ServiceLocator.Container.Single<ILevelGamePlayService>());
             _levelsScreanControler.Initialize();
         }
 
@@ -28,6 +29,11 @@ namespace Assets.Scripts.Infrastructure.MonoComponents.UI.Screens.LevelsScreanSc
         {
             base.Dispose();
             _levelsScreanControler.Dispose();
+        }
+
+        private void Update()
+        {
+            _levelsScreanControler.ChangeHeader();
         }
     }
 }

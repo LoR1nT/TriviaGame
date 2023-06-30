@@ -1,4 +1,8 @@
 using Assets.Scripts.Infrastructure.MonoComponents.UI.Windows.Base;
+using Assets.Scripts.Infrastructure.Services.AssetsProvider.Implementation;
+using Assets.Scripts.Infrastructure.Services.LevelDataBase.Implementation;
+using Assets.Scripts.Infrastructure.Services.LevelGamePlay.Imlementation;
+using Infrastructure.Services.SevicesLocator.Implementation;
 using UnityEngine;
 
 namespace Infrastructure.MonoComponents.UI.Windows.PlayLavelScript
@@ -11,7 +15,7 @@ namespace Infrastructure.MonoComponents.UI.Windows.PlayLavelScript
         public override void Initialize()
         {
             base.Initialize();
-            _playLavelControler = new PlayLavelControler(_playLavelModel);
+            _playLavelControler = new PlayLavelControler(_playLavelModel, ServiceLocator.Container.Single<ILevelGamePlayService>());
             _playLavelControler.Initialize();
         }
 

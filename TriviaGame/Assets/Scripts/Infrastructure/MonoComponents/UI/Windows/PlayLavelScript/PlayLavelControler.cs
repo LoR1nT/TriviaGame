@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using Assets.Scripts.Infrastructure.Services.LevelDataBase.Data;
+using Assets.Scripts.Infrastructure.Services.LevelGamePlay.Imlementation;
 using UnityEngine;
 
 namespace Infrastructure.MonoComponents.UI.Windows.PlayLavelScript
@@ -6,18 +7,35 @@ namespace Infrastructure.MonoComponents.UI.Windows.PlayLavelScript
     public class PlayLavelControler
     {
         private PlayLavelModel _playLavelModel;
-        private readonly int _minLengthOfTimeBar = 5;
-        private readonly float _timerForAnswer = 30f;
+        private ILevelGamePlayService _levelGamePlayService;
+        private QuestionData _curentQuestion;
 
-        public PlayLavelControler(PlayLavelModel playLavelModel)
+        public PlayLavelControler(PlayLavelModel playLavelModel, ILevelGamePlayService levelGamePlayService)
         {
+            _levelGamePlayService = levelGamePlayService;
             _playLavelModel = playLavelModel;
+
         }
 
         public void Initialize()
         {
-            TimerStart();
+            InitializeData();
             InitializeButtons();
+        }
+
+        public void InitializeData()
+        {
+            _curentQuestion = _levelGamePlayService.GetCurentQuestion();
+            InitializeText();
+        }
+
+        private void InitializeText()
+        {
+            _playLavelModel.QuesionText.text = _curentQuestion.Text;
+            for (int i = 0; i < _playLavelModel.Answers.Count; i++)
+            {
+                _playLavelModel.Answers[i].text = _curentQuestion.Answers[i].Text;
+            }
         }
 
         private void InitializeButtons()
@@ -30,44 +48,57 @@ namespace Infrastructure.MonoComponents.UI.Windows.PlayLavelScript
 
         private void FirstAnswer()
         {
-            Debug.Log("FirstAnswer");
+            int indexOfFirstAnswer = 0;
+            if (_levelGamePlayService.CheckAnswer(indexOfFirstAnswer))
+            {
+                _playLavelModel.FirstButtonImage.color = Color.green;
+            }
+            else
+            {
+                _playLavelModel.FirstButtonImage.color = Color.red;
+            }
         }
 
         private void SecondAnswer()
         {
-            Debug.Log("SecondAnswer");
+            int indexOfSecondAnswer = 1;
+            if (_levelGamePlayService.CheckAnswer(indexOfSecondAnswer))
+            {
+                _playLavelModel.SecondButtonImage.color = Color.green;
+            }
+            else
+            {
+                _playLavelModel.SecondButtonImage.color = Color.red;
+            }
         }
 
         private void ThirdAnswer()
         {
-            Debug.Log("ThirdAnswer");
+            int indexOfThirdAnswer = 2;
+            if (_levelGamePlayService.CheckAnswer(indexOfThirdAnswer))
+            {
+                _playLavelModel.ThirdButtonImage.color = Color.green;
+            }
+            else
+            {
+                _playLavelModel.ThirdButtonImage.color = Color.red;
+            }
         }
 
         private void FourthAnswer()
         {
-            Debug.Log("FourthAnswer");
-        }
-
-        private void TimerStart()
-        {
-            Sequence loadingBarSequence = DOTween.Sequence();
-            loadingBarSequence.SetRecyclable(true);
-            loadingBarSequence.AppendInterval(0.5f);
-            loadingBarSequence.Append(TimeBarAnimation()); ;
-            loadingBarSequence.AppendInterval(0.2f);
-            loadingBarSequence.AppendCallback(() =>
+            int indexOfFourthAnswer = 3;
+            if (_levelGamePlayService.CheckAnswer(indexOfFourthAnswer))
             {
-                Debug.Log("Time is Out");
-            });
+                _playLavelModel.FourthButtonImage.color = Color.green;
+            }
+            else
+            {
+                _playLavelModel.FourthButtonImage.color = Color.red;
+            }
         }
 
-        private Tween TimeBarAnimation()
-        {
-            return _playLavelModel.TimeBarFill
-            .DOSizeDelta(new Vector2(_minLengthOfTimeBar, _playLavelModel.TimeBarFill.sizeDelta.y), _timerForAnswer)
-            .SetEase(Ease.Linear)
-            .SetRecyclable(true);
-        }
+
 
         public void Dispose()
         {

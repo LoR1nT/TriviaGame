@@ -53,13 +53,12 @@ namespace Assets.Scripts.Infrastructure.MonoComponents.UI.Windows.LevelSwithScri
                 levelButton = _gameFactory.Create<LevelButton>(LevelButton,_levelSwithModel.ParentForButtons);
                 _buttons.Add(levelButton);
                 TransferDataToButton(levelButton, i);
-                Debug.Log("Spawning Button" + (i+1));
             }
         }
 
-        private void TransferDataToButton(LevelButton levelButton,int numberOfLevel)
+        private void TransferDataToButton(LevelButton levelButton,int indexOfLevel)
         {
-            levelButton.Data((numberOfLevel+1),0);
+            levelButton.Data(indexOfLevel);
         }
 
 

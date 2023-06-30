@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.Infrastructure.MonoComponents.UI.Windows.Base;
-using UnityEngine;
 
 namespace Infrastructure.Services.Windows.Data
 {

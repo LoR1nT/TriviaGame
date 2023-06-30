@@ -129,6 +129,11 @@ MonoBehaviour:
   _levelButtonModel:
     _levelButton: {fileID: 160080894153691044}
     _numberOfLevelText: {fileID: 1111932403923438249}
+    _scoreImage: {fileID: 8749737398311505883}
+    _noStars: {fileID: 21300000, guid: b19c31c958c9045479ce70ff1d58191a, type: 3}
+    _oneStars: {fileID: 21300000, guid: de62b8c6f5c8043d8966543b0ae2de22, type: 3}
+    _twoStars: {fileID: 21300000, guid: de27c1d672bac4fb3b57f6b6a087974e, type: 3}
+    _threeStars: {fileID: 21300000, guid: 9a596ddd4077b47ff97f723052ba7715, type: 3}
 --- !u!1 &1941645057144285568
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,7 +245,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 21300000, guid: 214dec849a0eb4875b95dcdc45a50468, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -248,7 +253,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 3470922188435373858}
+  m_TargetGraphic: {fileID: 8749737398311505883}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []

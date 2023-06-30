@@ -1,5 +1,7 @@
 using Assets.Scripts.Infrastructure.Services.AssetsProvider.Implementation;
 using Assets.Scripts.Infrastructure.Services.GameFactorys.Implementation;
+using Assets.Scripts.Infrastructure.Services.LevelDataBase.Implementation;
+using Assets.Scripts.Infrastructure.Services.LevelGamePlay.Imlementation;
 using Assets.Scripts.Infrastructure.Services.SceneLoader;
 using Assets.Scripts.Infrastructure.Services.SceneLoader.Implementation;
 using Infrastructure.MonoComponents.UI.Screens.LoadingScreanScript;
@@ -32,6 +34,9 @@ namespace Infrastructure.Services.StateMachine.States
         private IAssetProvider _assetProvider = null;
         private IGameFactory _gameFactory = null;
         private IScreanService _screanService = null;
+        private ILevelDataBaseService _levelDataBaseService = null;
+        private IWindowsService _windowsService = null;
+        private IPopupService _popupService = null;
 
         public AppInitializationState(IStateMachine stateMachine, ServiceLocator serviceLocator)
         {
@@ -69,6 +74,7 @@ namespace Infrastructure.Services.StateMachine.States
             _sceneLoaderService = _serviceLocator.Register<ISceneLoaderService>(new SceneLoaderService());
             _assetProvider = _serviceLocator.Register<IAssetProvider>(new AssetProvider());
             _gameFactory = _serviceLocator.Register<IGameFactory>(new GameFactory());
+
         }
 
         private void CreateUIRoot()
@@ -80,10 +86,12 @@ namespace Infrastructure.Services.StateMachine.States
         private void RegisterUI()
         {
             _serviceLocator.Register<IUIRoot>(_uiRoot);
-            
-            _serviceLocator.Register<IPopupService>(new PopupService(new PopupContainer(), _uiRoot, _assetProvider,_gameFactory));
+
+            _popupService = _serviceLocator.Register<IPopupService>(new PopupService(new PopupContainer(), _uiRoot, _assetProvider,_gameFactory));
             _screanService = _serviceLocator.Register<IScreanService>(new ScreanService(new ScreanContainer(), _uiRoot, _assetProvider, _gameFactory));
-            _serviceLocator.Register<IWindowsService>(new WindowsService(new WindowsContainer(), _uiRoot, _assetProvider, _gameFactory));
+            _windowsService = _serviceLocator.Register<IWindowsService>(new WindowsService(new WindowsContainer(), _uiRoot, _assetProvider, _gameFactory));
+            _levelDataBaseService = _serviceLocator.Register<ILevelDataBaseService>(new LevelDataBaseService(_assetProvider));
+            _serviceLocator.Register<ILevelGamePlayService>(new LevelGamePlayService(_windowsService, _popupService, _levelDataBaseService));
         }
 
         public void Exit()

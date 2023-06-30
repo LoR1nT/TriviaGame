@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 2167845914112669037}
   - component: {fileID: 2167845914112669034}
   m_Layer: 5
-  m_Name: PlayLavel_Header_Score_correct_count_Text
+  m_Name: PlayLevel_Header_Score_correct_count_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -569,7 +569,7 @@ GameObject:
   - component: {fileID: 2167845914941417880}
   - component: {fileID: 2167845914941417881}
   m_Layer: 5
-  m_Name: PlayLavel_Header_Score_inCorrect_count_Text
+  m_Name: PlayLevel_Header_Score_inCorrect_count_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1501,6 +1501,10 @@ MonoBehaviour:
     _levelSwithHeader: {fileID: 2167845914406209083}
     _playLevelHeader: {fileID: 2167845914119187689}
     _backButton: {fileID: 2167845915119821628}
+    _timeBarFill: {fileID: 2167845915252213273}
+    _playLevelHeaderScoreCorrectCountText: {fileID: 2167845914112669034}
+    _playLevelHeaderScoreInCorrectCountText: {fileID: 2167845914941417881}
+    _playLevelHeaderScoreMaxCountText: {fileID: 2167845915802494811}
 --- !u!1 &2167845915542538799
 GameObject:
   m_ObjectHideFlags: 0
@@ -1628,7 +1632,7 @@ GameObject:
   - component: {fileID: 2167845915802494810}
   - component: {fileID: 2167845915802494811}
   m_Layer: 5
-  m_Name: PlayLavel_Header_Score_Max_count_Text
+  m_Name: PlayLevel_Header_Score_Max_count_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

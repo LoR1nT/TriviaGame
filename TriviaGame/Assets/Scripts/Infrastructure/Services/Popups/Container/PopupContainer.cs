@@ -14,6 +14,7 @@ namespace Infrastructure.Services.Popups.Container
                 [PopupType.SettingsPopup] = new PopupConfiguration("Setting Popup", "Popups/PopupSettings/Popup_settings"),
                 [PopupType.VicrotyPopup] = new PopupConfiguration("Victory Popup", "Popups/PopupVictory/Popup_Victory"),
                 [PopupType.LostPopup] = new PopupConfiguration("Lost Popup", "Popups/PopupLost/Popup_Lost"),
+                [PopupType.NextQuestionPopup] = new PopupConfiguration("NextQuestion Popup", "Popups/PopupNextQuestion/Popup_nextQuestion"),
             };
         }
 
