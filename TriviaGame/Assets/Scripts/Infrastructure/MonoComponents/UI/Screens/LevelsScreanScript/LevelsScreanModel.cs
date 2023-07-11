@@ -20,8 +20,8 @@ namespace Assets.Scripts.Infrastructure.MonoComponents.UI.Screens.LevelsScreanSc
         public GameObject PlayLevelHeader { get { return _playLevelHeader; } }
         public Button BackButton { get { return _backButton;} }
         public RectTransform TimeBarFill { get {  return _timeBarFill; } set { } }
-        public TMP_Text PlayLevelHeaderScoreCorrectCountText { get { return _playLevelHeaderScoreCorrectCountText;} }
-        public TMP_Text PlayLevelHeaderScoreInCorrectCountText { get { return _playLevelHeaderScoreInCorrectCountText;} }
-        public TMP_Text PlayLevelHeaderScoreMaxCountText { get { return _playLevelHeaderScoreMaxCountText;} }
+        public TMP_Text PlayLevelHeaderScoreCorrectCountText { get { return _playLevelHeaderScoreCorrectCountText;} set { } }
+        public TMP_Text PlayLevelHeaderScoreInCorrectCountText { get { return _playLevelHeaderScoreInCorrectCountText;} set { } }
+        public TMP_Text PlayLevelHeaderScoreMaxCountText { get { return _playLevelHeaderScoreMaxCountText;} set { } }
     }
 }

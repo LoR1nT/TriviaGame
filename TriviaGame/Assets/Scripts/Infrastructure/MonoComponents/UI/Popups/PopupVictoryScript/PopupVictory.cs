@@ -1,4 +1,9 @@
 using Assets.Scripts.Infrastructure.MonoComponents.UI.Popups.Base;
+using Assets.Scripts.Infrastructure.Services.EventHolder.Implementation;
+using Assets.Scripts.Infrastructure.Services.LevelGamePlay.Imlementation;
+using Infrastructure.Services.Popups.Implementation;
+using Infrastructure.Services.Screans.Implementation;
+using Infrastructure.Services.SevicesLocator.Implementation;
 using UnityEngine;
 
 namespace Infrastructure.MonoComponents.UI.Popups.PopupVictoryScript
@@ -12,7 +17,11 @@ namespace Infrastructure.MonoComponents.UI.Popups.PopupVictoryScript
         {
             base.Initialize();
 
-            _popupVictoryControler = new PopupVictoryControler(_popupVictoryModel);
+            _popupVictoryControler = new PopupVictoryControler(_popupVictoryModel,
+                ServiceLocator.Container.Single<IPopupService>(),
+                ServiceLocator.Container.Single<IScreanService>(), 
+                ServiceLocator.Container.Single<IEventHolderService>(),
+                ServiceLocator.Container.Single<ILevelGamePlayService>());
 
             _popupVictoryControler.Initialize();
         }
@@ -20,6 +29,7 @@ namespace Infrastructure.MonoComponents.UI.Popups.PopupVictoryScript
         public override void Open()
         {
             base.Open();
+            _popupVictoryControler.OpenPopup();
         }
 
         public override void Dispose()

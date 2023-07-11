@@ -1,4 +1,5 @@
 using Assets.Scripts.Infrastructure.Services.AssetsProvider.Implementation;
+using Assets.Scripts.Infrastructure.Services.EventHolder.Implementation;
 using Assets.Scripts.Infrastructure.Services.GameFactorys.Implementation;
 using Assets.Scripts.Infrastructure.Services.LevelDataBase.Implementation;
 using Assets.Scripts.Infrastructure.Services.LevelGamePlay.Imlementation;
@@ -37,6 +38,7 @@ namespace Infrastructure.Services.StateMachine.States
         private ILevelDataBaseService _levelDataBaseService = null;
         private IWindowsService _windowsService = null;
         private IPopupService _popupService = null;
+        private IEventHolderService _eventHolderService = null;
 
         public AppInitializationState(IStateMachine stateMachine, ServiceLocator serviceLocator)
         {
@@ -90,8 +92,9 @@ namespace Infrastructure.Services.StateMachine.States
             _popupService = _serviceLocator.Register<IPopupService>(new PopupService(new PopupContainer(), _uiRoot, _assetProvider,_gameFactory));
             _screanService = _serviceLocator.Register<IScreanService>(new ScreanService(new ScreanContainer(), _uiRoot, _assetProvider, _gameFactory));
             _windowsService = _serviceLocator.Register<IWindowsService>(new WindowsService(new WindowsContainer(), _uiRoot, _assetProvider, _gameFactory));
+            _eventHolderService = _serviceLocator.Register<IEventHolderService>(new EventHolderService());
             _levelDataBaseService = _serviceLocator.Register<ILevelDataBaseService>(new LevelDataBaseService(_assetProvider));
-            _serviceLocator.Register<ILevelGamePlayService>(new LevelGamePlayService(_windowsService, _popupService, _levelDataBaseService));
+            _serviceLocator.Register<ILevelGamePlayService>(new LevelGamePlayService(_windowsService, _popupService, _levelDataBaseService, _eventHolderService));
         }
 
         public void Exit()

@@ -1,13 +1,7 @@
-﻿using Assets.Scripts.Infrastructure.MonoComponents.ScriptableObjects.Configurations.Level;
-using Assets.Scripts.Infrastructure.Services.AssetsProvider.Implementation;
-using Assets.Scripts.Infrastructure.Services.LevelDataBase.Implementation;
+﻿using Assets.Scripts.Infrastructure.Services.EventHolder.Implementation;
 using Assets.Scripts.Infrastructure.Services.LevelGamePlay.Imlementation;
-using Infrastructure.MonoComponents.UI.Windows.PlayLavelScript;
 using Infrastructure.Services.Windows.Data;
 using Infrastructure.Services.Windows.Implementation;
-using UnityEditor;
-using UnityEngine;
-using UnityEngine.UI;
 
 namespace Assets.Scripts.Infrastructure.MonoComponents.UI.Windows.LevelButtonScript
 {
@@ -18,9 +12,14 @@ namespace Assets.Scripts.Infrastructure.MonoComponents.UI.Windows.LevelButtonScr
         private int _levelButtonScore = 0;
         private readonly IWindowsService _windowsService;
         private ILevelGamePlayService _levelGamePlayService;
+        private IEventHolderService _eventHolderService;
 
-        public LevelButtonControler(LevelButtonModel levelButtonModel, IWindowsService windowsService, ILevelGamePlayService levelGamePlayService)
+        public LevelButtonControler(LevelButtonModel levelButtonModel,
+            IWindowsService windowsService,
+            ILevelGamePlayService levelGamePlayService,
+            IEventHolderService eventHolderService)
         {
+            _eventHolderService = eventHolderService;
             _levelGamePlayService = levelGamePlayService;
             _levelButtonModel = levelButtonModel;
             _windowsService = windowsService;
@@ -35,13 +34,14 @@ namespace Assets.Scripts.Infrastructure.MonoComponents.UI.Windows.LevelButtonScr
 
         private void ChangeUIText()
         {
-            _levelButtonModel.NumberOfLevelText.text = (_levelButtonIndex+1).ToString();
+            _levelButtonModel.NumberOfLevelText.text = (_levelButtonIndex + 1).ToString();
         }
-                
+
 
         private void StartLevel()
         {
             _levelGamePlayService.StartNewLevel(_levelButtonIndex);
+            _eventHolderService.OnSwitchLevelMenuView(false);
             _windowsService.CloseWindow(WindowsType.LevelSwitch);
         }
 
@@ -66,10 +66,7 @@ namespace Assets.Scripts.Infrastructure.MonoComponents.UI.Windows.LevelButtonScr
 
         private void ChangeUIState()
         {
-            if (false)
-            {
-                
-            }
+
         }
 
         public void DataTransfer(int level)

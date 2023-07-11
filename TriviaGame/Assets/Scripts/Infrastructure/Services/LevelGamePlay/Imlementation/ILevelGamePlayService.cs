@@ -9,10 +9,12 @@ namespace Assets.Scripts.Infrastructure.Services.LevelGamePlay.Imlementation
         public QuestionData GetCurentQuestion();
         public bool CheckAnswer(int answerIndex);
         public bool IsAnswerWasRigth();
-        public bool CheckStateIsStart();
         public bool CheckStateIsInGame();
-        public bool CheckTime(bool isTimeOut);
+        public void TimeOut();
         public void OpenQuestion();
         public LevelData GetLevelData();
+        public void QuitLevel();
+        public int GetScoreCorrect();
+        public int GetScoreInCorrect();
     }
 }

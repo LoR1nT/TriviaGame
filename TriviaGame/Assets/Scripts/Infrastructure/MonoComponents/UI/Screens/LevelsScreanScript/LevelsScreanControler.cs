@@ -1,4 +1,6 @@
 ﻿using Assets.Scripts.Infrastructure.MonoComponents.UI.Windows.LevelSwithScript;
+using Assets.Scripts.Infrastructure.Services.EventHolder.Implementation;
+using Assets.Scripts.Infrastructure.Services.LevelDataBase.Data;
 using Assets.Scripts.Infrastructure.Services.LevelGamePlay.Imlementation;
 using DG.Tweening;
 using Infrastructure.Services.Screans.Data;
@@ -15,16 +17,21 @@ namespace Assets.Scripts.Infrastructure.MonoComponents.UI.Screens.LevelsScreanSc
         private IScreanService _screenService;
         private IWindowsService _windowsService;
         private ILevelGamePlayService _levelGamePlayService;
+        private IEventHolderService _eventHolderService;
         private readonly int _minLengthOfTimeBar = 5;
         private readonly float _timerForAnswer = 15f;
-        public bool _state = true;
         private Sequence _timerBarSequence = null;
 
-        public LevelsScreanControler(LevelsScreanModel levelsScreanModel,IScreanService screanService, IWindowsService windowsService, ILevelGamePlayService levelGamePlayService)
+        public LevelsScreanControler(LevelsScreanModel levelsScreanModel,
+            IScreanService screanService,
+            IWindowsService windowsService,
+            ILevelGamePlayService levelGamePlayService,
+            IEventHolderService eventHolderService)
         {
             _levelsScreanModel = levelsScreanModel;
             _screenService = screanService;
             _windowsService = windowsService;
+            _eventHolderService = eventHolderService;
             _levelGamePlayService = levelGamePlayService;
         }
 
@@ -32,11 +39,26 @@ namespace Assets.Scripts.Infrastructure.MonoComponents.UI.Screens.LevelsScreanSc
         {
             _levelsScreanModel.BackButton.onClick.AddListener(GoBack);
             CreateTimerSequence();
+            InitializeEvent();
+            _timerBarSequence.Play();
         }
 
         public void OpenScreen()
         {
             SpawnButtonsWindow();
+            _levelsScreanModel.PlayLevelHeader.SetActive(false);
+        }
+
+        private void InitializeEvent()
+        {
+            _eventHolderService.OnLevelStartEvent += OnLevelStart;
+            _eventHolderService.OnSwitchLevelMenuViewEvent += OnSwitchLevelMenuView;            
+        }
+
+        private void UpdateScore()
+        {            
+            _levelsScreanModel.PlayLevelHeaderScoreCorrectCountText.text = _levelGamePlayService.GetScoreCorrect().ToString();
+            _levelsScreanModel.PlayLevelHeaderScoreInCorrectCountText.text = _levelGamePlayService.GetScoreInCorrect().ToString();
         }
 
         private void SpawnButtonsWindow()
@@ -52,22 +74,19 @@ namespace Assets.Scripts.Infrastructure.MonoComponents.UI.Screens.LevelsScreanSc
             Debug.Log("GoBack");
         }
 
-        public void ChangeHeader()
+        private void OnSwitchLevelMenuView(bool isMenuView)
         {
-            if (_levelGamePlayService.CheckStateIsStart() && _state == true)
-            {
-                _levelsScreanModel.LevelSwithHeader.SetActive(false);
-            }
-
-            if (_levelGamePlayService.CheckStateIsInGame() && (_state == true))
-            {
-                _levelsScreanModel.PlayLevelHeader.SetActive(true);
-                _timerBarSequence.Play();
-                Debug.Log("Animation Start");
-                _state = false;
-
-            }
+            _levelsScreanModel.LevelSwithHeader.SetActive(isMenuView);
         }
+
+        private void OnLevelStart()
+        {
+            _levelsScreanModel.PlayLevelHeader.SetActive(true);
+            _timerBarSequence.Restart();
+            UpdateScore();
+            Debug.Log("Level Start");
+        }
+
 
         private void CreateTimerSequence()
         {
@@ -78,7 +97,7 @@ namespace Assets.Scripts.Infrastructure.MonoComponents.UI.Screens.LevelsScreanSc
             _timerBarSequence.AppendInterval(0.2f);
             _timerBarSequence.AppendCallback(() =>
             {
-                _levelGamePlayService.CheckTime(true);
+                _levelGamePlayService.TimeOut();
                 Debug.Log("Time is Out");
             });
         }
@@ -93,6 +112,8 @@ namespace Assets.Scripts.Infrastructure.MonoComponents.UI.Screens.LevelsScreanSc
 
         public void Dispose()
         {
+            _eventHolderService.OnLevelStartEvent -= OnLevelStart;
+            _eventHolderService.OnSwitchLevelMenuViewEvent -= OnSwitchLevelMenuView;
             _levelsScreanModel.BackButton.onClick.RemoveAllListeners();
         }
     }
