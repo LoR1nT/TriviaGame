@@ -45,6 +45,7 @@ namespace Assets.Scripts.Infrastructure.Services.LevelGamePlay.Imlementation
         public void StartNewLevel(int levelIndex)
         {
             _curentLevelIndex = levelIndex;
+            Debug.Log("Start Level" + levelIndex);
             _curentLevelData = _levelDataBaseService.GetCurrentLevelData(_curentLevelIndex);
             StartLevel();            
         }
@@ -53,6 +54,7 @@ namespace Assets.Scripts.Infrastructure.Services.LevelGamePlay.Imlementation
         private void StartLevel()
         {
             _popupService.OpenPopup<PopupNextQuestion>(PopupType.NextQuestionPopup);
+            Debug.Log("OpenPopup");
         }
 
         public void OpenQuestion()

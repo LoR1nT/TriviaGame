@@ -6,6 +6,7 @@ using Infrastructure.Services.Popups.Data;
 using Infrastructure.Services.Popups.Implementation;
 using Infrastructure.Services.Screans.Data;
 using Infrastructure.Services.Screans.Implementation;
+using Infrastructure.Services.Windows.Data;
 using UnityEngine;
 
 namespace Infrastructure.MonoComponents.UI.Popups.PopupVictoryScript
@@ -57,6 +58,7 @@ namespace Infrastructure.MonoComponents.UI.Popups.PopupVictoryScript
         {
             Debug.Log("GoToNextLavel");
             _levelGamePlayService.StartNewLevel(_levelData.Index + 1);
+            _eventHolderService.OnSwitchLevelMenuView(false);
             _popupService.ClosePopup(PopupType.VicrotyPopup);
         }
 
